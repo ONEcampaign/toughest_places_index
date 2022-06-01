@@ -1,0 +1,5 @@
+pandas
+country_converter
+wbgapi
+weo
+pyjstat
