@@ -174,3 +174,23 @@ def add_share_of_population(
     df[target_col] = round(100 * df[value_col] / df.population, 2)
 
     return df.drop(columns=["population"])
+
+
+def read_and_append(
+    new_data: pd.DataFrame, file_path: str, date_col: str = "date", idx: list = None
+) -> pd.DataFrame:
+    """Read and append data to a file. This removes duplicates by date."""
+
+    if idx is None:
+        idx = ["iso_code"]
+    # Read file
+    saved = pd.read_csv(rf"{file_path}", parse_dates=[date_col])
+
+    # Append new data
+    data = pd.concat([saved, new_data], ignore_index=True)
+
+    return (
+        data.sort_values(by=idx + [date_col])
+        .drop_duplicates(subset=idx + [date_col], keep="last")
+        .reset_index(drop=True)
+    )
