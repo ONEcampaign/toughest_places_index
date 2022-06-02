@@ -35,7 +35,7 @@ class Paths:
 PATHS: Paths = Paths(os.path.dirname(os.path.dirname(__file__)))
 
 
-DEBT_SERVICE_IDS = {
+DEBT_SERVICE_IDS: dict = {
     "DT.AMT.BLAT.CD": "Bilateral",
     "DT.AMT.MLAT.CD": "Multilateral",
     "DT.AMT.PBND.CD": "Private",
