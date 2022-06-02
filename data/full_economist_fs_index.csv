@@ -1,0 +1,566 @@
+ranking,country,score,indicator,iso_code
+1,Ireland,84.0,overall,IRL
+2,Austria,81.3,overall,AUT
+3,United Kingdom,81.0,overall,GBR
+4,Finland,80.9,overall,FIN
+5,Switzerland,80.4,overall,CHE
+6,Netherlands,79.9,overall,NLD
+7,Canada,79.8,overall,CAN
+8,Japan,79.3,overall,JPN
+=9,France,79.1,overall,FRA
+=9,United States,79.1,overall,USA
+11,Germany,78.7,overall,DEU
+12,Israel,78.0,overall,ISR
+13,Sweden,77.9,overall,SWE
+14,Czech Republic,77.8,overall,CZE
+15,Singapore,77.4,overall,SGP
+16,New Zealand,76.8,overall,NZL
+17,Denmark,76.5,overall,DNK
+18,Italy,76.4,overall,ITA
+19,Belgium,76.1,overall,BEL
+20,Norway,76.0,overall,NOR
+21,Portugal,75.2,overall,PRT
+22,Poland,74.9,overall,POL
+23,Russia,74.8,overall,RUS
+=24,Costa Rica,73.6,overall,CRI
+=24,Qatar,73.6,overall,QAT
+=24,Spain,73.6,overall,ESP
+27,Greece,73.3,overall,GRC
+28,Chile,73.2,overall,CHL
+29,Romania,72.4,overall,ROU
+30,Kuwait,72.2,overall,KWT
+31,Hungary,72.1,overall,HUN
+=32,Australia,71.6,overall,AUS
+=32,South Korea,71.6,overall,KOR
+34,China,71.3,overall,CHN
+35,United Arab Emirates,71.0,overall,ARE
+=36,Belarus,70.9,overall,BLR
+=36,Panama,70.9,overall,PAN
+38,Bulgaria,70.5,overall,BGR
+39,Malaysia,70.1,overall,MYS
+40,Oman,70.0,overall,OMN
+41,Kazakhstan,69.2,overall,KAZ
+42,Slovakia,68.7,overall,SVK
+43,Bahrain,68.5,overall,BHR
+44,Saudi Arabia,68.1,overall,SAU
+45,Uruguay,68.0,overall,URY
+46,Mexico,66.9,overall,MEX
+47,Dominican Republic,65.4,overall,DOM
+48,Turkey,65.1,overall,TUR
+=49,Jordan,64.6,overall,JOR
+=49,Peru,64.6,overall,PER
+51,Thailand,64.5,overall,THA
+52,Colombia,64.4,overall,COL
+53,Argentina,64.2,overall,ARG
+54,Algeria,63.9,overall,DZA
+55,Tunisia,62.7,overall,TUN
+56,Azerbaijan,62.6,overall,AZE
+57,Morocco,62.5,overall,MAR
+58,Ukraine,62.0,overall,UKR
+59,Paraguay,61.6,overall,PRY
+60,Serbia,61.4,overall,SRB
+61,Vietnam,61.1,overall,VNM
+62,Egypt,60.8,overall,EGY
+63,Brazil,60.6,overall,BRA
+64,Philippines,60.0,overall,PHL
+65,Bolivia,59.9,overall,BOL
+66,Ecuador,59.6,overall,ECU
+67,El Salvador,59.5,overall,SLV
+68,Honduras,59.4,overall,HND
+69,Indonesia,59.2,overall,IDN
+70,South Africa,57.8,overall,ZAF
+71,India,57.2,overall,IND
+72,Myanmar,56.7,overall,MMR
+73,Nicaragua,56.0,overall,NIC
+74,Botswana,55.5,overall,BWA
+75,Pakistan,54.7,overall,PAK
+76,Mali,54.5,overall,MLI
+77,Sri Lanka,54.1,overall,LKA
+78,Uzbekistan,53.8,overall,UZB
+79,Nepal,53.7,overall,NPL
+80,Guatemala,53.5,overall,GTM
+81,Cambodia,53.0,overall,KHM
+82,Ghana,52.0,overall,GHA
+83,Tajikistan,51.6,overall,TJK
+84,Bangladesh,49.1,overall,BGD
+85,Burkina Faso,48.1,overall,BFA
+=86,Côte d'Ivoire,48.0,overall,CIV
+=86,Tanzania,48.0,overall,TZA
+88,Niger,47.6,overall,NER
+89,Senegal,47.4,overall,SEN
+90,Kenya,46.8,overall,KEN
+91,Laos,46.4,overall,LAO
+92,Cameroon,45.5,overall,CMR
+93,Benin,45.2,overall,BEN
+94,Togo,44.2,overall,TGO
+95,Uganda,43.9,overall,UGA
+96,Guinea,43.0,overall,GIN
+97,Nigeria,41.3,overall,NGA
+98,Angola,41.1,overall,AGO
+99,Chad,40.6,overall,TCD
+100,Madagascar,40.4,overall,MDG
+101,Rwanda,40.3,overall,RWA
+102,Venezuela,39.4,overall,VEN
+103,Congo (Dem. Rep.),39.1,overall,COD
+104,Sierra Leone,38.1,overall,SLE
+105,Zambia,38.0,overall,ZMB
+=106,Haiti,37.8,overall,HTI
+=106,Syria,37.8,overall,SYR
+108,Ethiopia,37.6,overall,ETH
+109,Malawi,37.3,overall,MWI
+110,Sudan,37.1,overall,SDN
+111,Mozambique,35.9,overall,MOZ
+112,Yemen,35.7,overall,YEM
+113,Burundi,34.7,overall,BDI
+1,Denmark,93.1,affordability,DNK
+2,Ireland,92.9,affordability,IRL
+3,Finland,91.7,affordability,FIN
+4,United Kingdom,91.1,affordability,GBR
+5,Sweden,91.0,affordability,SWE
+6,New Zealand,90.9,affordability,NZL
+7,Israel,90.6,affordability,ISR
+8,Austria,90.5,affordability,AUT
+9,France,90.3,affordability,FRA
+10,Germany,90.1,affordability,DEU
+11,Japan,90.0,affordability,JPN
+12,Belgium,89.8,affordability,BEL
+13,Netherlands,89.7,affordability,NLD
+14,Slovakia,89.6,affordability,SVK
+15,Italy,89.3,affordability,ITA
+=16,Greece,89.0,affordability,GRC
+=16,Switzerland,89.0,affordability,CHE
+=18,Oman,88.8,affordability,OMN
+=18,Portugal,88.8,affordability,PRT
+20,United States,88.7,affordability,USA
+21,Spain,88.4,affordability,ESP
+22,Czech Republic,88.3,affordability,CZE
+23,Singapore,87.9,affordability,SGP
+24,Canada,87.6,affordability,CAN
+25,Poland,87.0,affordability,POL
+26,Russia,86.9,affordability,RUS
+27,Belarus,86.3,affordability,BLR
+28,Malaysia,85.6,affordability,MYS
+29,Australia,84.9,affordability,AUS
+30,Costa Rica,84.5,affordability,CRI
+31,Qatar,83.8,affordability,QAT
+32,Hungary,83.5,affordability,HUN
+=33,Bulgaria,83.3,affordability,BGR
+=33,Norway,83.3,affordability,NOR
+35,Kazakhstan,83.0,affordability,KAZ
+=36,Panama,82.6,affordability,PAN
+=36,Serbia,82.6,affordability,SRB
+38,Chile,82.4,affordability,CHL
+39,Azerbaijan,82.3,affordability,AZE
+=40,Romania,81.8,affordability,ROU
+=40,Thailand,81.8,affordability,THA
+42,Jordan,80.4,affordability,JOR
+43,South Korea,80.3,affordability,KOR
+44,Kuwait,80.1,affordability,KWT
+45,Peru,79.8,affordability,PER
+46,Bahrain,79.2,affordability,BHR
+47,Algeria,77.9,affordability,DZA
+48,Paraguay,77.5,affordability,PRY
+49,China,77.4,affordability,CHN
+50,United Arab Emirates,75.9,affordability,ARE
+51,Uruguay,75.4,affordability,URY
+52,Morocco,75.1,affordability,MAR
+53,Saudi Arabia,75.0,affordability,SAU
+54,Indonesia,74.9,affordability,IDN
+55,Dominican Republic,74.6,affordability,DOM
+56,Tunisia,74.4,affordability,TUN
+57,Philippines,74.3,affordability,PHL
+58,Ukraine,73.9,affordability,UKR
+59,Mexico,73.8,affordability,MEX
+60,Bolivia,73.0,affordability,BOL
+61,Ecuador,71.0,affordability,ECU
+62,Colombia,70.4,affordability,COL
+63,Botswana,69.6,affordability,BWA
+64,Vietnam,68.9,affordability,VNM
+65,Cambodia,68.8,affordability,KHM
+66,Brazil,68.7,affordability,BRA
+67,Turkey,67.6,affordability,TUR
+68,Egypt,66.5,affordability,EGY
+69,Nicaragua,66.1,affordability,NIC
+70,Argentina,65.6,affordability,ARG
+71,El Salvador,65.5,affordability,SLV
+72,South Africa,63.1,affordability,ZAF
+73,Sri Lanka,62.9,affordability,LKA
+74,Ghana,60.0,affordability,GHA
+75,Myanmar,58.9,affordability,MMR
+76,Guatemala,58.0,affordability,GTM
+77,Tajikistan,53.1,affordability,TJK
+78,Honduras,53.0,affordability,HND
+79,Pakistan,52.6,affordability,PAK
+80,India,50.2,affordability,IND
+81,Uzbekistan,49.3,affordability,UZB
+82,Bangladesh,48.8,affordability,BGD
+83,Nepal,48.3,affordability,NPL
+84,Laos,47.7,affordability,LAO
+85,Kenya,47.6,affordability,KEN
+=86,Cameroon,45.5,affordability,CMR
+=86,Côte d'Ivoire,45.5,affordability,CIV
+88,Senegal,44.4,affordability,SEN
+89,Mali,43.7,affordability,MLI
+90,Mozambique,42.9,affordability,MOZ
+91,Benin,42.1,affordability,BEN
+92,Burkina Faso,42.0,affordability,BFA
+93,Uganda,41.5,affordability,UGA
+94,Togo,40.8,affordability,TGO
+95,Tanzania,39.7,affordability,TZA
+96,Yemen,39.3,affordability,YEM
+97,Congo (Dem. Rep.),38.0,affordability,COD
+98,Chad,37.8,affordability,TCD
+99,Venezuela,37.3,affordability,VEN
+100,Niger,37.1,affordability,NER
+101,Madagascar,36.3,affordability,MDG
+102,Sierra Leone,34.1,affordability,SLE
+103,Syria,34.0,affordability,SYR
+104,Nigeria,33.4,affordability,NGA
+105,Angola,32.6,affordability,AGO
+106,Guinea,32.5,affordability,GIN
+107,Sudan,31.8,affordability,SDN
+108,Zambia,29.0,affordability,ZMB
+109,Haiti,27.8,affordability,HTI
+110,Rwanda,25.8,affordability,RWA
+111,Ethiopia,24.5,affordability,ETH
+112,Burundi,24.0,affordability,BDI
+113,Malawi,23.6,affordability,MWI
+1,Singapore,82.9,availability,SGP
+2,China,78.4,availability,CHN
+3,Canada,77.7,availability,CAN
+4,Switzerland,76.9,availability,CHE
+5,Japan,75.7,availability,JPN
+=6,Austria,75.2,availability,AUT
+=6,Israel,75.2,availability,ISR
+8,Ireland,75.1,availability,IRL
+9,Qatar,74.4,availability,QAT
+10,Netherlands,73.7,availability,NLD
+11,United Kingdom,72.7,availability,GBR
+12,Kuwait,72.3,availability,KWT
+13,Italy,71.5,availability,ITA
+14,United Arab Emirates,71.3,availability,ARE
+15,Belgium,71.1,availability,BEL
+16,United States,71.0,availability,USA
+17,South Korea,69.7,availability,KOR
+18,Germany,69.3,availability,DEU
+19,Czech Republic,69.1,availability,CZE
+20,Saudi Arabia,67.8,availability,SAU
+21,Bahrain,67.5,availability,BHR
+22,Panama,67.4,availability,PAN
+23,Portugal,67.1,availability,PRT
+24,France,67.0,availability,FRA
+25,Hungary,66.9,availability,HUN
+26,Chile,66.8,availability,CHL
+27,Romania,66.6,availability,ROU
+28,Finland,66.2,availability,FIN
+29,India,65.7,availability,IND
+30,Poland,65.0,availability,POL
+31,Russia,64.9,availability,RUS
+=32,Mali,64.5,availability,MLI
+=32,Nepal,64.5,availability,NPL
+34,Honduras,64.2,availability,HND
+35,Australia,64.1,availability,AUS
+36,Malaysia,64.0,availability,MYS
+37,Indonesia,63.7,availability,IDN
+38,New Zealand,63.2,availability,NZL
+39,Pakistan,63.0,availability,PAK
+40,Sweden,62.7,availability,SWE
+41,Dominican Republic,62.0,availability,DOM
+42,Turkey,61.6,availability,TUR
+=43,Costa Rica,61.4,availability,CRI
+=43,Denmark,61.4,availability,DNK
+45,Spain,61.2,availability,ESP
+46,Mexico,60.9,availability,MEX
+47,Norway,60.6,availability,NOR
+48,Vietnam,60.4,availability,VNM
+49,Egypt,60.0,availability,EGY
+50,Greece,59.6,availability,GRC
+=51,Bulgaria,59.2,availability,BGR
+=51,El Salvador,59.2,availability,SLV
+53,Argentina,58.8,availability,ARG
+54,Kazakhstan,58.5,availability,KAZ
+55,Bangladesh,58.1,availability,BGD
+=56,Algeria,58.0,availability,DZA
+=56,Azerbaijan,58.0,availability,AZE
+58,Tanzania,57.4,availability,TZA
+=59,Oman,57.3,availability,OMN
+=59,Thailand,57.3,availability,THA
+61,Colombia,57.2,availability,COL
+62,Belarus,57.0,availability,BLR
+63,Burkina Faso,55.6,availability,BFA
+64,Jordan,55.2,availability,JOR
+65,Peru,54.6,availability,PER
+66,Tunisia,54.0,availability,TUN
+67,Philippines,53.9,availability,PHL
+68,Côte d'Ivoire,53.6,availability,CIV
+=69,Guinea,53.1,availability,GIN
+=69,Uruguay,53.1,availability,URY
+71,Bolivia,52.9,availability,BOL
+72,Niger,52.6,availability,NER
+73,Myanmar,52.2,availability,MMR
+=74,Morocco,51.8,availability,MAR
+=74,Ukraine,51.8,availability,UKR
+76,Uzbekistan,51.3,availability,UZB
+77,Tajikistan,51.1,availability,TJK
+78,Benin,50.7,availability,BEN
+79,Sri Lanka,50.6,availability,LKA
+80,Ecuador,50.5,availability,ECU
+81,South Africa,49.4,availability,ZAF
+82,Slovakia,48.8,availability,SVK
+83,Cambodia,48.7,availability,KHM
+84,Ghana,48.6,availability,GHA
+85,Nicaragua,48.3,availability,NIC
+86,Guatemala,48.2,availability,GTM
+=87,Paraguay,47.7,availability,PRY
+=87,Senegal,47.7,availability,SEN
+=89,Botswana,47.5,availability,BWA
+=89,Ethiopia,47.5,availability,ETH
+91,Togo,46.7,availability,TGO
+92,Brazil,46.4,availability,BRA
+93,Laos,46.1,availability,LAO
+94,Rwanda,45.9,availability,RWA
+95,Kenya,45.6,availability,KEN
+96,Nigeria,45.3,availability,NGA
+97,Angola,42.6,availability,AGO
+98,Cameroon,42.4,availability,CMR
+99,Chad,42.0,availability,TCD
+100,Congo (Dem. Rep.),41.6,availability,COD
+101,Madagascar,41.1,availability,MDG
+102,Malawi,40.9,availability,MWI
+103,Zambia,40.4,availability,ZMB
+104,Haiti,40.2,availability,HTI
+105,Serbia,38.4,availability,SRB
+106,Uganda,38.0,availability,UGA
+107,Burundi,33.7,availability,BDI
+108,Sierra Leone,32.1,availability,SLE
+109,Sudan,31.6,availability,SDN
+110,Mozambique,30.4,availability,MOZ
+111,Syria,30.1,availability,SYR
+112,Yemen,27.6,availability,YEM
+113,Venezuela,27.1,availability,VEN
+1,Canada,94.5,quality_and_safety,CAN
+2,United States,94.3,quality_and_safety,USA
+3,Ireland,94.0,quality_and_safety,IRL
+4,Finland,93.8,quality_and_safety,FIN
+5,Denmark,93.5,quality_and_safety,DNK
+6,Sweden,92.3,quality_and_safety,SWE
+7,Netherlands,92.2,quality_and_safety,NLD
+8,France,92.1,quality_and_safety,FRA
+9,Austria,91.2,quality_and_safety,AUT
+=10,Israel,90.7,quality_and_safety,ISR
+=10,Norway,90.7,quality_and_safety,NOR
+12,Argentina,90.2,quality_and_safety,ARG
+13,Brazil,90.0,quality_and_safety,BRA
+14,United Kingdom,89.6,quality_and_safety,GBR
+15,Greece,89.5,quality_and_safety,GRC
+16,United Arab Emirates,88.8,quality_and_safety,ARE
+17,Portugal,88.3,quality_and_safety,PRT
+=18,Australia,87.8,quality_and_safety,AUS
+=18,Germany,87.8,quality_and_safety,DEU
+=20,Kuwait,86.4,quality_and_safety,KWT
+=20,Switzerland,86.4,quality_and_safety,CHE
+22,Italy,86.2,quality_and_safety,ITA
+23,Russia,85.8,quality_and_safety,RUS
+24,Romania,85.4,quality_and_safety,ROU
+25,Belgium,85.2,quality_and_safety,BEL
+26,Spain,84.4,quality_and_safety,ESP
+27,Chile,84.2,quality_and_safety,CHL
+28,Oman,83.8,quality_and_safety,OMN
+29,Qatar,83.5,quality_and_safety,QAT
+30,Japan,83.4,quality_and_safety,JPN
+31,Belarus,82.8,quality_and_safety,BLR
+32,Costa Rica,82.4,quality_and_safety,CRI
+33,New Zealand,82.0,quality_and_safety,NZL
+34,Bulgaria,81.5,quality_and_safety,BGR
+35,Czech Republic,81.4,quality_and_safety,CZE
+36,Uruguay,81.2,quality_and_safety,URY
+37,Serbia,81.1,quality_and_safety,SRB
+=38,Kazakhstan,81.0,quality_and_safety,KAZ
+=38,Mexico,81.0,quality_and_safety,MEX
+40,Poland,80.5,quality_and_safety,POL
+41,Bahrain,79.9,quality_and_safety,BHR
+42,Saudi Arabia,79.8,quality_and_safety,SAU
+43,Singapore,79.1,quality_and_safety,SGP
+44,South Korea,78.5,quality_and_safety,KOR
+45,Hungary,77.4,quality_and_safety,HUN
+46,Malaysia,76.3,quality_and_safety,MYS
+47,Turkey,75.8,quality_and_safety,TUR
+48,Paraguay,74.9,quality_and_safety,PRY
+49,Slovakia,72.9,quality_and_safety,SVK
+=50,Colombia,72.3,quality_and_safety,COL
+=50,Morocco,72.3,quality_and_safety,MAR
+=50,Panama,72.3,quality_and_safety,PAN
+=53,South Africa,72.1,quality_and_safety,ZAF
+=53,Tunisia,72.1,quality_and_safety,TUN
+55,Ukraine,71.9,quality_and_safety,UKR
+56,China,71.4,quality_and_safety,CHN
+57,Peru,71.2,quality_and_safety,PER
+58,Ecuador,70.8,quality_and_safety,ECU
+59,Dominican Republic,69.5,quality_and_safety,DOM
+60,Uzbekistan,65.1,quality_and_safety,UZB
+=61,Venezuela,64.3,quality_and_safety,VEN
+=61,Vietnam,64.3,quality_and_safety,VNM
+63,Honduras,63.8,quality_and_safety,HND
+64,Jordan,63.5,quality_and_safety,JOR
+65,El Salvador,63.2,quality_and_safety,SLV
+66,Myanmar,63.0,quality_and_safety,MMR
+67,Algeria,62.0,quality_and_safety,DZA
+68,Philippines,61.5,quality_and_safety,PHL
+=69,Bolivia,61.1,quality_and_safety,BOL
+=69,Mali,61.1,quality_and_safety,MLI
+71,Egypt,60.7,quality_and_safety,EGY
+72,Botswana,59.6,quality_and_safety,BWA
+73,Thailand,59.5,quality_and_safety,THA
+=74,Azerbaijan,59.1,quality_and_safety,AZE
+=74,India,59.1,quality_and_safety,IND
+76,Ghana,58.2,quality_and_safety,GHA
+77,Nicaragua,57.7,quality_and_safety,NIC
+78,Guatemala,57.4,quality_and_safety,GTM
+79,Senegal,55.9,quality_and_safety,SEN
+=80,Pakistan,55.7,quality_and_safety,PAK
+=80,Tajikistan,55.7,quality_and_safety,TJK
+82,Kenya,54.8,quality_and_safety,KEN
+83,Nepal,53.7,quality_and_safety,NPL
+84,Syria,53.2,quality_and_safety,SYR
+85,Sudan,52.4,quality_and_safety,SDN
+=86,Rwanda,52.1,quality_and_safety,RWA
+=86,Sri Lanka,52.1,quality_and_safety,LKA
+88,Niger,51.7,quality_and_safety,NER
+89,Cameroon,51.6,quality_and_safety,CMR
+90,Tanzania,50.6,quality_and_safety,TZA
+=91,Laos,49.2,quality_and_safety,LAO
+=91,Uganda,49.2,quality_and_safety,UGA
+93,Angola,48.7,quality_and_safety,AGO
+94,Nigeria,48.6,quality_and_safety,NGA
+95,Indonesia,48.5,quality_and_safety,IDN
+=96,Benin,48.2,quality_and_safety,BEN
+=96,Burkina Faso,48.2,quality_and_safety,BFA
+98,Burundi,45.7,quality_and_safety,BDI
+99,Bangladesh,45.5,quality_and_safety,BGD
+100,Cambodia,44.3,quality_and_safety,KHM
+101,Haiti,44.2,quality_and_safety,HTI
+=102,Chad,42.3,quality_and_safety,TCD
+=102,Côte d'Ivoire,42.3,quality_and_safety,CIV
+104,Zambia,42.0,quality_and_safety,ZMB
+105,Ethiopia,41.6,quality_and_safety,ETH
+106,Guinea,40.4,quality_and_safety,GIN
+107,Madagascar,39.9,quality_and_safety,MDG
+108,Yemen,37.4,quality_and_safety,YEM
+109,Malawi,37.1,quality_and_safety,MWI
+110,Sierra Leone,36.8,quality_and_safety,SLE
+111,Congo (Dem. Rep.),36.0,quality_and_safety,COD
+112,Togo,35.1,quality_and_safety,TGO
+113,Mozambique,33.8,quality_and_safety,MOZ
+1,Norway,76.1,natural_resources_and_resilience,NOR
+2,Finland,75.1,natural_resources_and_resilience,FIN
+3,Ireland,74.1,natural_resources_and_resilience,IRL
+4,Czech Republic,70.9,natural_resources_and_resilience,CZE
+5,New Zealand,70.8,natural_resources_and_resilience,NZL
+6,United Kingdom,69.0,natural_resources_and_resilience,GBR
+7,Uruguay,68.5,natural_resources_and_resilience,URY
+8,France,67.5,natural_resources_and_resilience,FRA
+9,Sweden,67.3,natural_resources_and_resilience,SWE
+10,Costa Rica,67.0,natural_resources_and_resilience,CRI
+11,Germany,66.0,natural_resources_and_resilience,DEU
+12,Austria,65.7,natural_resources_and_resilience,AUT
+13,Switzerland,65.1,natural_resources_and_resilience,CHE
+14,Poland,65.0,natural_resources_and_resilience,POL
+15,Slovakia,62.7,natural_resources_and_resilience,SVK
+16,Japan,61.9,natural_resources_and_resilience,JPN
+17,United States,61.3,natural_resources_and_resilience,USA
+18,Netherlands,61.2,natural_resources_and_resilience,NLD
+19,Russia,59.9,natural_resources_and_resilience,RUS
+20,Colombia,58.4,natural_resources_and_resilience,COL
+21,Spain,58.2,natural_resources_and_resilience,ESP
+22,Sierra Leone,58.0,natural_resources_and_resilience,SLE
+23,Honduras,57.8,natural_resources_and_resilience,HND
+24,Chile,57.1,natural_resources_and_resilience,CHL
+25,Denmark,56.9,natural_resources_and_resilience,DNK
+26,Bulgaria,56.8,natural_resources_and_resilience,BGR
+27,Turkey,56.4,natural_resources_and_resilience,TUR
+28,Belarus,56.3,natural_resources_and_resilience,BLR
+29,Malawi,55.9,natural_resources_and_resilience,MWI
+=30,Hungary,55.4,natural_resources_and_resilience,HUN
+=30,Uzbekistan,55.4,natural_resources_and_resilience,UZB
+32,Togo,55.1,natural_resources_and_resilience,TGO
+=33,Myanmar,54.7,natural_resources_and_resilience,MMR
+=33,Panama,54.7,natural_resources_and_resilience,PAN
+35,Canada,54.4,natural_resources_and_resilience,CAN
+36,Jordan,54.2,natural_resources_and_resilience,JOR
+37,Uganda,53.7,natural_resources_and_resilience,UGA
+38,Greece,53.6,natural_resources_and_resilience,GRC
+39,Niger,53.4,natural_resources_and_resilience,NER
+40,India,52.8,natural_resources_and_resilience,IND
+41,Romania,52.6,natural_resources_and_resilience,ROU
+42,Portugal,52.3,natural_resources_and_resilience,PRT
+43,South Korea,52.2,natural_resources_and_resilience,KOR
+44,Egypt,52.0,natural_resources_and_resilience,EGY
+45,Kazakhstan,51.9,natural_resources_and_resilience,KAZ
+46,Italy,51.8,natural_resources_and_resilience,ITA
+=47,Guatemala,51.2,natural_resources_and_resilience,GTM
+=47,Mexico,51.2,natural_resources_and_resilience,MEX
+49,Belgium,50.9,natural_resources_and_resilience,BEL
+50,Thailand,50.8,natural_resources_and_resilience,THA
+51,Algeria,50.7,natural_resources_and_resilience,DZA
+52,Dominican Republic,50.3,natural_resources_and_resilience,DOM
+53,Nicaragua,49.8,natural_resources_and_resilience,NIC
+=54,Mali,49.4,natural_resources_and_resilience,MLI
+=54,South Africa,49.4,natural_resources_and_resilience,ZAF
+56,Ukraine,49.3,natural_resources_and_resilience,UKR
+57,Morocco,49.0,natural_resources_and_resilience,MAR
+58,Peru,48.4,natural_resources_and_resilience,PER
+59,Côte d'Ivoire,48.2,natural_resources_and_resilience,CIV
+=60,Israel,47.6,natural_resources_and_resilience,ISR
+=60,Tunisia,47.6,natural_resources_and_resilience,TUN
+62,Bolivia,47.4,natural_resources_and_resilience,BOL
+63,Madagascar,47.3,natural_resources_and_resilience,MDG
+64,China,47.2,natural_resources_and_resilience,CHN
+65,Singapore,46.7,natural_resources_and_resilience,SGP
+66,Malaysia,46.6,natural_resources_and_resilience,MYS
+=67,Guinea,46.4,natural_resources_and_resilience,GIN
+=67,Zambia,46.4,natural_resources_and_resilience,ZMB
+69,Sri Lanka,46.3,natural_resources_and_resilience,LKA
+=70,Angola,45.9,natural_resources_and_resilience,AGO
+=70,Tajikistan,45.9,natural_resources_and_resilience,TJK
+72,Argentina,45.8,natural_resources_and_resilience,ARG
+=73,Burkina Faso,45.5,natural_resources_and_resilience,BFA
+=73,El Salvador,45.5,natural_resources_and_resilience,SLV
+75,Cameroon,45.3,natural_resources_and_resilience,CMR
+=76,Haiti,45.2,natural_resources_and_resilience,HTI
+=76,Oman,45.2,natural_resources_and_resilience,OMN
+78,Vietnam,44.9,natural_resources_and_resilience,VNM
+=79,Burundi,44.8,natural_resources_and_resilience,BDI
+=79,Rwanda,44.8,natural_resources_and_resilience,RWA
+=81,Australia,44.7,natural_resources_and_resilience,AUS
+=81,Paraguay,44.7,natural_resources_and_resilience,PRY
+=81,Serbia,44.7,natural_resources_and_resilience,SRB
+84,Saudi Arabia,44.3,natural_resources_and_resilience,SAU
+85,Ecuador,44.1,natural_resources_and_resilience,ECU
+86,Nepal,44.0,natural_resources_and_resilience,NPL
+87,Senegal,43.9,natural_resources_and_resilience,SEN
+=88,Philippines,43.6,natural_resources_and_resilience,PHL
+=88,United Arab Emirates,43.6,natural_resources_and_resilience,ARE
+90,Tanzania,43.5,natural_resources_and_resilience,TZA
+91,Qatar,43.4,natural_resources_and_resilience,QAT
+92,Syria,43.3,natural_resources_and_resilience,SYR
+93,Kuwait,43.0,natural_resources_and_resilience,KWT
+94,Brazil,42.4,natural_resources_and_resilience,BRA
+95,Pakistan,42.2,natural_resources_and_resilience,PAK
+96,Yemen,42.1,natural_resources_and_resilience,YEM
+97,Laos,42.0,natural_resources_and_resilience,LAO
+98,Chad,41.6,natural_resources_and_resilience,TCD
+99,Sudan,41.4,natural_resources_and_resilience,SDN
+100,Nigeria,41.3,natural_resources_and_resilience,NGA
+101,Venezuela,41.1,natural_resources_and_resilience,VEN
+102,Cambodia,40.7,natural_resources_and_resilience,KHM
+103,Botswana,40.0,natural_resources_and_resilience,BWA
+104,Congo (Dem. Rep.),39.9,natural_resources_and_resilience,COD
+105,Kenya,39.7,natural_resources_and_resilience,KEN
+106,Ethiopia,39.4,natural_resources_and_resilience,ETH
+107,Bahrain,39.1,natural_resources_and_resilience,BHR
+108,Azerbaijan,38.2,natural_resources_and_resilience,AZE
+109,Benin,37.8,natural_resources_and_resilience,BEN
+110,Ghana,37.3,natural_resources_and_resilience,GHA
+111,Bangladesh,36.8,natural_resources_and_resilience,BGD
+112,Mozambique,35.2,natural_resources_and_resilience,MOZ
+113,Indonesia,33.0,natural_resources_and_resilience,IDN
