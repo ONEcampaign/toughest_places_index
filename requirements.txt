@@ -4,3 +4,4 @@ wbgapi
 weo
 pyjstat
 requests
+openpyxl
