@@ -1,11 +1,11 @@
+import os
 from dataclasses import dataclass
 
 import pandas as pd
 import requests
+
 from index.common import add_iso_codes
 from index.config import PATHS
-
-import os
 
 URL: str = (
     "https://impact.economist.com/sustainability/project/"
@@ -151,7 +151,6 @@ class EconomistIndex:
 
 
 if __name__ == "__main__":
-
     # Example use
     index = EconomistIndex()
     overall = index.get_overall_data()
