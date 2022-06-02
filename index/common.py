@@ -5,6 +5,7 @@ import pandas as pd
 import wbgapi as wb
 
 from index.config import PATHS
+import os
 
 
 def add_short_names(
@@ -193,4 +194,58 @@ def read_and_append(
         data.sort_values(by=idx + [date_col])
         .drop_duplicates(subset=idx + [date_col], keep="last")
         .reset_index(drop=True)
+    )
+
+
+def _download_income_levels() -> None:
+    """Downloads fresh version of income levels from WB"""
+    url = "https://databank.worldbank.org/data/download/site-content/CLASS.xlsx"
+
+    df = pd.read_excel(
+        url,
+        sheet_name="List of economies",
+        usecols=["Code", "Income group"],
+        na_values=None,
+    )
+
+    df = df.dropna(subset=["Income group"])
+
+    df.to_csv(PATHS.data + r"/income_levels.csv", index=False)
+
+
+def income_levels() -> dict:
+    """Return income level dictionary"""
+    path = f"{PATHS.data}/income_levels.csv"
+
+    if not os.path.exists(path):
+        _download_income_levels()
+
+    return pd.read_csv(path, na_values=None, index_col="Code")["Income group"].to_dict()
+
+
+def add_income_levels(
+    df: pd.DataFrame,
+    id_col: str = "iso_code",
+    target_col: str = "income_level",
+) -> pd.DataFrame:
+    """Add an income level column to DataFrame
+    :param df: str
+        A Pandas DataFrame with an id column (iso2, iso3, un code, etc)
+    :param id_col: str
+        Name of the column which contains the country id.
+    :param target_col: str
+        Name of the column which will store the income level data.
+    :return:
+        A Pandas DataFrame with a new column containing the income level data column.
+    """
+    # Create a coco object
+    coco = cc.CountryConverter()
+
+    return (
+        df.assign(
+            id_=lambda d: coco.convert(d[id_col], to="ISO3"),
+            income_level=lambda d: d["id_"].map(income_levels()),
+        )
+        .drop(columns=["id_"])
+        .rename(columns={"income_level": target_col})
     )
