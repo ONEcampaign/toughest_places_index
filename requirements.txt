@@ -5,3 +5,4 @@ weo
 pyjstat
 requests
 openpyxl
+numpy
