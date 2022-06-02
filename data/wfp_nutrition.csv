@@ -1,0 +1,375 @@
+iso_code,indicator,value,country_name
+AFG,wasting,5.1,Afghanistan
+AFG,stunting,38.2,Afghanistan
+ALB,wasting,1.6,Albania
+ALB,stunting,11.3,Albania
+DZA,wasting,4.1,Algeria
+DZA,stunting,11.7,Algeria
+AND,wasting,,Andorra
+AND,stunting,,Andorra
+AGO,wasting,4.9,Angola
+AGO,stunting,37.6,Angola
+ATA,wasting,,Antarctica
+ATA,stunting,,Antarctica
+ATG,wasting,,Antigua and Barbuda
+ATG,stunting,,Antigua and Barbuda
+ARG,wasting,1.6,Argentina
+ARG,stunting,7.9,Argentina
+ARM,wasting,4.4,Armenia
+ARM,stunting,9.4,Armenia
+AUS,wasting,,Australia
+AUS,stunting,,Australia
+AUT,wasting,,Austria
+AUT,stunting,,Austria
+AZE,wasting,3.2,Azerbaijan
+AZE,stunting,17.8,Azerbaijan
+BHS,wasting,,Bahamas
+BHS,stunting,,Bahamas
+BHR,wasting,6.6,Bahrain
+BHR,stunting,13.6,Bahrain
+BGD,wasting,8.4,Bangladesh
+BGD,stunting,30.8,Bangladesh
+BRB,wasting,6.8,Barbados
+BRB,stunting,7.7,Barbados
+BLR,wasting,2.2,Belarus
+BLR,stunting,4.5,Belarus
+BEL,wasting,,Belgium
+BEL,stunting,,Belgium
+BLZ,wasting,1.8,Belize
+BLZ,stunting,15.0,Belize
+BEN,wasting,5.0,Benin
+BEN,stunting,32.2,Benin
+BTN,wasting,5.9,Bhutan
+BTN,stunting,33.5,Bhutan
+BOL,wasting,2.0,Bolivia
+BOL,stunting,16.1,Bolivia
+BIH,wasting,2.3,Bosnia and Herzegovina
+BIH,stunting,8.9,Bosnia and Herzegovina
+BWA,wasting,7.3,Botswana
+BWA,stunting,28.9,Botswana
+BRA,wasting,1.8,Brazil
+BRA,stunting,7.0,Brazil
+BRN,wasting,2.9,Brunei Darussalam
+BRN,stunting,19.7,Brunei Darussalam
+BGR,wasting,6.3,Bulgaria
+BGR,stunting,7.0,Bulgaria
+BFA,wasting,8.4,Burkina Faso
+BFA,stunting,24.9,Burkina Faso
+BDI,wasting,4.8,Burundi
+BDI,stunting,54.0,Burundi
+KHM,wasting,9.7,Cambodia
+KHM,stunting,32.4,Cambodia
+CMR,wasting,4.5,Cameroon
+CMR,stunting,29.3,Cameroon
+CAN,wasting,,Canada
+CAN,stunting,,Canada
+CPV,wasting,6.9,Cabo Verde
+CPV,stunting,21.4,Cabo Verde
+CAF,wasting,5.8,Central African Republic
+CAF,stunting,42.3,Central African Republic
+TCD,wasting,10.0,Chad
+TCD,stunting,30.5,Chad
+CHL,wasting,0.3,Chile
+CHL,stunting,1.8,Chile
+COM,wasting,11.2,Comoros
+COM,stunting,31.1,Comoros
+COG,wasting,8.2,Congo Republic
+COG,stunting,21.2,Congo Republic
+CYP,wasting,,Cyprus
+CYP,stunting,,Cyprus
+CZE,wasting,4.6,Czech Republic
+CZE,stunting,2.7,Czech Republic
+CIV,wasting,6.1,Cote d'Ivoire
+CIV,stunting,21.6,Cote d'Ivoire
+COD,wasting,8.1,DR Congo
+COD,stunting,42.7,DR Congo
+DNK,wasting,,Denmark
+DNK,stunting,,Denmark
+DJI,wasting,21.5,Djibouti
+DJI,stunting,33.5,Djibouti
+DOM,wasting,2.4,Dominican Republic
+DOM,stunting,7.1,Dominican Republic
+ECU,wasting,1.6,Ecuador
+ECU,stunting,23.9,Ecuador
+SLV,wasting,2.1,El Salvador
+SLV,stunting,13.6,El Salvador
+GNQ,wasting,3.1,Equatorial Guinea
+GNQ,stunting,26.2,Equatorial Guinea
+ERI,wasting,14.6,Eritrea
+ERI,stunting,52.5,Eritrea
+EST,wasting,,Estonia
+EST,stunting,,Estonia
+ETH,wasting,7.2,Ethiopia
+ETH,stunting,36.8,Ethiopia
+FIN,wasting,,Finland
+FIN,stunting,,Finland
+FRA,wasting,,France
+FRA,stunting,,France
+GAB,wasting,3.4,Gabon
+GAB,stunting,17.0,Gabon
+GMB,wasting,6.2,Gambia
+GMB,stunting,19.0,Gambia
+GEO,wasting,1.6,Georgia
+GEO,stunting,11.3,Georgia
+DEU,wasting,0.3,Germany
+DEU,stunting,1.7,Germany
+GHA,wasting,6.8,Ghana
+GHA,stunting,17.5,Ghana
+GRC,wasting,,Greece
+GRC,stunting,,Greece
+GRD,wasting,,Grenada
+GRD,stunting,,Grenada
+GTM,wasting,0.8,Guatemala
+GTM,stunting,46.7,Guatemala
+GNB,wasting,6.0,Guinea-Bissau
+GNB,stunting,27.6,Guinea-Bissau
+GIN,wasting,9.2,Guinea
+GIN,stunting,30.3,Guinea
+GUY,wasting,6.4,Guyana
+GUY,stunting,11.3,Guyana
+HTI,wasting,6.0,Haiti
+HTI,stunting,22.7,Haiti
+VAT,wasting,,Vatican
+VAT,stunting,,Vatican
+HND,wasting,1.4,Honduras
+HND,stunting,22.6,Honduras
+HUN,wasting,,Hungary
+HUN,stunting,,Hungary
+ISL,wasting,,Iceland
+ISL,stunting,,Iceland
+IND,wasting,17.3,India
+IND,stunting,34.7,India
+IRN,wasting,4.0,Iran
+IRN,stunting,6.8,Iran
+IRQ,wasting,2.5,Iraq
+IRQ,stunting,9.9,Iraq
+IRL,wasting,,Ireland
+IRL,stunting,,Ireland
+ISR,wasting,,Israel
+ISR,stunting,,Israel
+ITA,wasting,,Italy
+ITA,stunting,,Italy
+JAM,wasting,3.6,Jamaica
+JAM,stunting,6.0,Jamaica
+JPN,wasting,2.3,Japan
+JPN,stunting,7.1,Japan
+JOR,wasting,2.4,Jordan
+JOR,stunting,7.8,Jordan
+KAZ,wasting,3.1,Kazakhstan
+KAZ,stunting,8.0,Kazakhstan
+KEN,wasting,4.2,Kenya
+KEN,stunting,26.2,Kenya
+KIR,wasting,,Kiribati
+KIR,stunting,,Kiribati
+KWT,wasting,2.5,Kuwait
+KWT,stunting,6.4,Kuwait
+KGZ,wasting,2.0,Kyrgyz Republic
+KGZ,stunting,11.8,Kyrgyz Republic
+LAO,wasting,9.0,Laos
+LAO,stunting,33.1,Laos
+LVA,wasting,,Latvia
+LVA,stunting,,Latvia
+LBN,wasting,6.6,Lebanon
+LBN,stunting,16.5,Lebanon
+LSO,wasting,2.1,Lesotho
+LSO,stunting,34.6,Lesotho
+LBR,wasting,4.3,Liberia
+LBR,stunting,30.1,Liberia
+LBY,wasting,10.2,Libya
+LBY,stunting,38.1,Libya
+LIE,wasting,,Liechtenstein
+LIE,stunting,,Liechtenstein
+LTU,wasting,,Lithuania
+LTU,stunting,,Lithuania
+LUX,wasting,,Luxembourg
+LUX,stunting,,Luxembourg
+MDG,wasting,6.4,Madagascar
+MDG,stunting,41.6,Madagascar
+MWI,wasting,1.3,Malawi
+MWI,stunting,39.0,Malawi
+MYS,wasting,11.5,Malaysia
+MYS,stunting,20.7,Malaysia
+MDV,wasting,10.6,Maldives
+MDV,stunting,19.0,Maldives
+MLI,wasting,9.0,Mali
+MLI,stunting,26.9,Mali
+MLT,wasting,,Malta
+MLT,stunting,,Malta
+MHL,wasting,3.5,Marshall Islands
+MHL,stunting,34.8,Marshall Islands
+MRT,wasting,11.5,Mauritania
+MRT,stunting,22.8,Mauritania
+MUS,wasting,15.7,Mauritius
+MUS,stunting,13.6,Mauritius
+MEX,wasting,2,Mexico
+MEX,stunting,10,Mexico
+FSM,wasting,,"Micronesia, Fed. Sts."
+FSM,stunting,,"Micronesia, Fed. Sts."
+MDA,wasting,1.9,Moldova
+MDA,stunting,6.4,Moldova
+MCO,wasting,,Monaco
+MCO,stunting,,Monaco
+MNG,wasting,0.9,Mongolia
+MNG,stunting,9.4,Mongolia
+MAR,wasting,2.6,Morocco
+MAR,stunting,15.1,Morocco
+MOZ,wasting,4.4,Mozambique
+MOZ,stunting,42.3,Mozambique
+NAM,wasting,6,Namibia
+NAM,stunting,24,Namibia
+NPL,wasting,9.6,Nepal
+NPL,stunting,36.1,Nepal
+NLD,wasting,,Netherlands
+NLD,stunting,,Netherlands
+NZL,wasting,,New Zealand
+NZL,stunting,,New Zealand
+NIC,wasting,2.2,Nicaragua
+NIC,stunting,17.3,Nicaragua
+NER,wasting,14.1,Niger
+NER,stunting,48.5,Niger
+NGA,wasting,6.8,Nigeria
+NGA,stunting,36.8,Nigeria
+NOR,wasting,,Norway
+NOR,stunting,,Norway
+OMN,wasting,9.3,Oman
+OMN,stunting,11.4,Oman
+PAK,wasting,7.1,Pakistan
+PAK,stunting,37.6,Pakistan
+PLW,wasting,,Palau
+PLW,stunting,,Palau
+PAN,wasting,1.2,Panama
+PAN,stunting,19.0,Panama
+PRY,wasting,1.0,Paraguay
+PRY,stunting,5.6,Paraguay
+PER,wasting,0.5,Peru
+PER,stunting,12.2,Peru
+POL,wasting,,Poland
+POL,stunting,2.6,Poland
+PRT,wasting,,Portugal
+PRT,stunting,,Portugal
+QAT,wasting,2.1,Qatar
+QAT,stunting,11.6,Qatar
+KOR,wasting,1.2,South Korea
+KOR,stunting,2.5,South Korea
+ROU,wasting,3.5,Romania
+ROU,stunting,12.8,Romania
+RUS,wasting,,Russia
+RUS,stunting,,Russia
+RWA,wasting,2.3,Rwanda
+RWA,stunting,38.3,Rwanda
+KNA,wasting,,St. Kitts and Nevis
+KNA,stunting,,St. Kitts and Nevis
+LCA,wasting,3.7,St. Lucia
+LCA,stunting,2.5,St. Lucia
+VCT,wasting,,St. Vincent and the Grenadines
+VCT,stunting,,St. Vincent and the Grenadines
+WSM,wasting,3.9,Samoa
+WSM,stunting,4.9,Samoa
+SMR,wasting,,San Marino
+SMR,stunting,,San Marino
+STP,wasting,4.0,Sao Tome and Principe
+STP,stunting,17.2,Sao Tome and Principe
+SAU,wasting,11.8,Saudi Arabia
+SAU,stunting,9.3,Saudi Arabia
+SYC,wasting,4.3,Seychelles
+SYC,stunting,7.9,Seychelles
+SLE,wasting,5.4,Sierra Leone
+SLE,stunting,29.5,Sierra Leone
+SGP,wasting,3.6,Singapore
+SGP,stunting,4.4,Singapore
+SVK,wasting,,Slovakia
+SVK,stunting,,Slovakia
+SVN,wasting,,Slovenia
+SVN,stunting,,Slovenia
+SLB,wasting,8.5,Solomon Islands
+SLB,stunting,31.7,Solomon Islands
+SOM,wasting,11.8,Somalia
+SOM,stunting,27.8,Somalia
+ZAF,wasting,2.5,South Africa
+ZAF,stunting,27.4,South Africa
+ESP,wasting,,Spain
+ESP,stunting,,Spain
+LKA,wasting,15.1,Sri Lanka
+LKA,stunting,17.3,Sri Lanka
+SUR,wasting,5.0,Suriname
+SUR,stunting,8.8,Suriname
+SWZ,wasting,2.0,Eswatini
+SWZ,stunting,25.5,Eswatini
+SWE,wasting,,Sweden
+SWE,stunting,,Sweden
+CHE,wasting,,Switzerland
+CHE,stunting,,Switzerland
+SYR,wasting,11.5,Syria
+SYR,stunting,27.9,Syria
+TJK,wasting,5.6,Tajikistan
+TJK,stunting,17.5,Tajikistan
+THA,wasting,5.4,Thailand
+THA,stunting,10.5,Thailand
+MKD,wasting,1.8,Macedonia
+MKD,stunting,4.9,Macedonia
+TLS,wasting,8.6,Timor-Leste
+TLS,stunting,47.1,Timor-Leste
+TGO,wasting,5.7,Togo
+TGO,stunting,23.8,Togo
+TON,wasting,5.2,Tonga
+TON,stunting,8.1,Tonga
+TTO,wasting,6.4,Trinidad and Tobago
+TTO,stunting,9.2,Trinidad and Tobago
+TUN,wasting,2.1,Tunisia
+TUN,stunting,8.4,Tunisia
+TUR,wasting,1.7,Turkey
+TUR,stunting,6.0,Turkey
+UGA,wasting,3.5,Uganda
+UGA,stunting,28.9,Uganda
+UKR,wasting,8.2,Ukraine
+UKR,stunting,22.9,Ukraine
+ARE,wasting,,United Arab Emirates
+ARE,stunting,,United Arab Emirates
+GBR,wasting,,United Kingdom
+GBR,stunting,,United Kingdom
+TZA,wasting,3.5,Tanzania
+TZA,stunting,31.8,Tanzania
+USA,wasting,0.4,United States
+USA,stunting,3.5,United States
+URY,wasting,1.3,Uruguay
+URY,stunting,10.7,Uruguay
+UZB,wasting,1.8,Uzbekistan
+UZB,stunting,10.8,Uzbekistan
+VNM,wasting,5.8,Vietnam
+VNM,stunting,23.8,Vietnam
+YEM,wasting,11.7,Yemen
+YEM,stunting,47.5,Yemen
+ZMB,wasting,4.2,Zambia
+ZMB,stunting,34.6,Zambia
+ZWE,wasting,2.9,Zimbabwe
+ZWE,stunting,23.5,Zimbabwe
+IDN,wasting,10.2,Indonesia
+IDN,stunting,30.8,Indonesia
+MMR,wasting,6.6,Myanmar
+MMR,stunting,29.4,Myanmar
+PNG,wasting,14.1,Papua New Guinea
+PNG,stunting,49.5,Papua New Guinea
+PHL,wasting,5.6,Philippines
+PHL,stunting,30.3,Philippines
+FJI,wasting,6.3,Fiji
+FJI,stunting,7.5,Fiji
+VUT,wasting,4.7,Vanuatu
+VUT,stunting,28.9,Vanuatu
+SEN,wasting,8.1,Senegal
+SEN,stunting,18.8,Senegal
+MNE,wasting,2.8,Montenegro
+MNE,stunting,9.4,Montenegro
+SRB,wasting,3.9,Serbia
+SRB,stunting,6.0,Serbia
+SDN,wasting,16.3,Sudan
+SDN,stunting,38.2,Sudan
+EGY,wasting,9.5,Egypt
+EGY,stunting,22.3,Egypt
+SSD,wasting,22.7,South Sudan
+SSD,stunting,31.3,South Sudan
+TWN,wasting,,Taiwan
+TWN,stunting,,Taiwan
+DMA,wasting,,Dominica
+DMA,stunting,,Dominica
+CUB,wasting,2.4,Cuba
+CUB,stunting,7.0,Cuba
