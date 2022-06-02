@@ -190,7 +190,7 @@ def read_and_append(
     data = pd.concat([saved, new_data], ignore_index=True)
 
     return (
-        data.sort_values(by= idx+ [date_col])
+        data.sort_values(by=idx + [date_col])
         .drop_duplicates(subset=idx + [date_col], keep="last")
         .reset_index(drop=True)
     )
