@@ -158,14 +158,44 @@ class IDSData:
         return self.data
 
 
-if __name__ == "__main__":
-    ids = IDSData(
+def get_service_spending_ratio(year: int) -> pd.DataFrame:
+    """Get the service spending ratio for a given year"""
+    ids_data = IDSData(
         indicators=DEBT_SERVICE_IDS,
         countries="all",
-        start_year=2022,
-        end_year=2022,
+        start_year=year,
+        end_year=year,
         source=6,
-        save_as="ids_service_22_22.csv",
+        save_as=f"ids_service_{year}-{year}.csv",
     )
 
-    data = ids.get_clean_data(detail=False)
+    service = ids_data.get_clean_data(detail=False)
+
+    service = (
+        service.groupby(["iso_code", "year"], as_index=False)
+        .sum()
+        .rename(columns={"year": "date"})
+    )
+
+    # get spending
+    from index.imf_weo import IMFData
+
+    imf_data = IMFData()
+    exchange = imf_data.get_exchange().rename(columns={"year": "date"})
+
+    spending = (
+        imf_data.get_general_gov_expenditure()
+        .rename(columns={"year": "date"})
+        .loc[lambda d: d.date.dt.year <= year]
+        .pipe(common.get_latest, by=["iso_code"])
+        .assign(value=lambda d: d.value * 1e9)  # from billions to units
+        .merge(exchange, on=["iso_code", "date"], how="left")
+        .assign(value=lambda d: d.value * d.xe)  # in USD
+        .drop(columns=["xe", "indicator", "date"])
+    )
+
+    df = service.merge(
+        spending, on=["iso_code"], how="left", suffixes=("_service", "_spending")
+    ).assign(ratio=lambda d: round(100 * d.value_service / d.value_spending, 2))
+
+    return df

@@ -52,7 +52,6 @@ def _clean_number(number: str) -> float:
 
 @dataclass
 class IMFData:
-    indicator: str | None = None
     data: pd.DataFrame = None
 
     @staticmethod
@@ -118,6 +117,12 @@ class IMFData:
             indicator="Gross domestic product, current prices"
         )
 
+    def get_gdp_current_lcu(self) -> pd.DataFrame:
+        """Indicator NGDP, Current"""
+        return self._get_indicator("NGDP").assign(
+            indicator="Gross domestic product, current LCU"
+        )
+
     def get_general_gov_expenditure(self) -> pd.DataFrame:
         """Indicator GGX, Current"""
         return self._get_indicator("GGX").assign(
@@ -142,3 +147,14 @@ class IMFData:
 
     def inflation_gdp(self) -> pd.DataFrame:
         return self._get_indicator("NGDP_D").assign(indicator="GDP, deflator")
+
+    def get_exchange(self) -> pd.DataFrame:
+        """Implied exchange rate, usd per lcu"""
+        usd = self.get_gdp_current()
+        lcu = self.get_gdp_current_lcu()
+
+        return (
+            usd.merge(lcu, on=["iso_code", "year"], suffixes=("_usd", "_lcu"))
+            .assign(xe=lambda d: d.value_usd / d.value_lcu)
+            .filter(["year","iso_code", "xe"], axis=1)
+        )
