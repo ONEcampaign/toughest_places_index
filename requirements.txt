@@ -6,3 +6,4 @@ pyjstat
 requests
 openpyxl
 numpy
+sklearn
