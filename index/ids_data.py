@@ -1,11 +1,12 @@
-from dataclasses import dataclass, field
-
 import os
+from dataclasses import dataclass, field
 
 import pandas as pd
 from pyjstat import pyjstat
-from index.config import PATHS, DEBT_SERVICE_IDS
+
 from index import common
+from index.config import PATHS, DEBT_SERVICE_IDS
+from index.imf_weo import WEOdata
 
 
 def _time_period(start_year: int, end_year: int) -> str:
@@ -158,14 +159,47 @@ class IDSData:
         return self.data
 
 
-if __name__ == "__main__":
-    ids = IDSData(
+def get_service_spending_ratio(year: int) -> pd.DataFrame:
+    """Get the service/spending ratio for a given year"""
+
+    # Create and IDS data object for debt service
+    ids_data = IDSData(
         indicators=DEBT_SERVICE_IDS,
         countries="all",
-        start_year=2022,
-        end_year=2022,
+        start_year=year,
+        end_year=year,
         source=6,
-        save_as="ids_service_22_22.csv",
+        save_as=f"ids_service_{year}-{year}.csv",
     )
 
-    data = ids.get_clean_data(detail=False)
+    # Get the debt service data, for 'World' counterpart area
+    service = ids_data.get_clean_data(detail=False)
+
+    # Calculate total service (i.e. not by creditor type)
+    service = service.groupby(["iso_code", "year"], as_index=False).sum()
+
+    # ---spending----
+
+    # Create WEOData object
+    weo_data = WEOdata()
+
+    # Get the implied exchange dates from WEO
+    exchange = weo_data.get_exchange()
+
+    # Get and clean the spending data (from LCU billion to USD)
+    spending = (
+        weo_data.get_general_gov_expenditure()
+        .loc[lambda d: d.year.dt.year <= year]
+        .pipe(common.get_latest, by=["iso_code"], date_col="year")
+        .assign(value=lambda d: d.value * 1e9)  # from billions to units
+        .merge(exchange, on=["iso_code", "year"], how="left")
+        .assign(value=lambda d: d.value * d.xe)  # in USD
+        .drop(columns=["xe", "indicator", "year"])
+    )
+
+    # Combine the datasets and calculate the ratio
+    df = service.merge(
+        spending, on=["iso_code"], how="left", suffixes=("_service", "_spending")
+    ).assign(ratio=lambda d: round(100 * d.value_service / d.value_spending, 2))
+
+    return df

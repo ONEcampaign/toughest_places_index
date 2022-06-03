@@ -1,11 +1,12 @@
 """Utility Functions"""
 
+import os
+
 import country_converter as cc
 import pandas as pd
 import wbgapi as wb
 
 from index.config import PATHS
-import os
 
 
 def add_short_names(
@@ -56,9 +57,9 @@ def add_iso_codes(
     return df
 
 
-def get_latest(df: pd.DataFrame, by: list) -> pd.DataFrame:
+def get_latest(df: pd.DataFrame, by: list, date_col: str = "date") -> pd.DataFrame:
     """Get the latest value, grouping by columns specified in 'by'"""
-    return df.sort_values(by=by + ["date"]).groupby(by, as_index=False).last()
+    return df.sort_values(by=by + [date_col]).groupby(by, as_index=False).last()
 
 
 def _get_wb_data(series: str, years: int):
