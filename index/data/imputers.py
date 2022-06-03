@@ -1,5 +1,7 @@
 from typing import Any
 
+from sklearn.experimental import enable_iterative_imputer  # noqa
+
 import pandas as pd
 from country_converter import country_converter
 from sklearn.impute import SimpleImputer, IterativeImputer, KNNImputer
