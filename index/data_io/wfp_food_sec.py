@@ -187,5 +187,13 @@ def create_wfp_database() -> None:
     nutrition.to_csv(rf"{PATHS.data}/wfp_nutrition.csv", index=False)
 
 
+def read_hunger_data() -> pd.DataFrame:
+    return pd.read_csv(rf"{PATHS.data}/wfp_insufficient_food.csv", parse_dates=["date"])
+
+
+def read_nutrition_data() -> pd.DataFrame:
+    return pd.read_csv(rf"{PATHS.data}/wfp_nutrition.csv")
+
+
 if __name__ == "__main__":
     create_wfp_database()
