@@ -6,7 +6,7 @@ from pyjstat import pyjstat
 
 from index import common
 from index.config import PATHS, DEBT_SERVICE_IDS
-from index.imf_weo import WEOdata
+from index.data_io.imf_weo import WEOdata
 
 
 def _time_period(start_year: int, end_year: int) -> str:
