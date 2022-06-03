@@ -57,8 +57,12 @@ def add_iso_codes(
     return df
 
 
-def get_latest(df: pd.DataFrame, by: list, date_col: str = "date") -> pd.DataFrame:
+def get_latest(
+    df: pd.DataFrame, by: list | str, date_col: str = "date"
+) -> pd.DataFrame:
     """Get the latest value, grouping by columns specified in 'by'"""
+    if isinstance(by, str):
+        by = [by]
     return df.sort_values(by=by + [date_col]).groupby(by, as_index=False).last()
 
 
