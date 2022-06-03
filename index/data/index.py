@@ -23,7 +23,7 @@ class Index:
             _ = dimension.get_data(orient=orient)
 
             if orient == "wide":
-                df = pd.concat([df, _], axis=1)
+                df = pd.concat([df, _.set_index("iso_code")], axis=1)
             else:
                 df = pd.concat([df, _], axis=0)
 
