@@ -1,11 +1,12 @@
 """Utility Functions"""
 
+import os
+
 import country_converter as cc
 import pandas as pd
 import wbgapi as wb
 
 from index.config import PATHS
-import os
 
 
 def add_short_names(

@@ -51,7 +51,7 @@ def _clean_number(number: str) -> float:
 
 
 @dataclass
-class IMFData:
+class WEOdata:
     data: pd.DataFrame = None
 
     @staticmethod
@@ -106,47 +106,49 @@ class IMFData:
 
         return (
             self.data.loc[lambda d: d.indicator == indicator]
-            .filter(["iso_code", "year", "value"], axis=1)
+            .filter(
+                ["iso_code", "year", "value", "indicator_name", "units", "scale"],
+                axis=1,
+            )
+            .assign(
+                indicator=lambda d: d.indicator_name
+                + " ("
+                + d.units
+                + ", "
+                + d.scale
+                + ")"
+            )
+            .drop(["indicator_name", "units", "scale"], axis=1)
             .sort_values(["iso_code", "year"])
             .reset_index(drop=True)
         )
 
     def get_gdp_current(self) -> pd.DataFrame:
         """Indicator NGDPD, Current"""
-        return self._get_indicator("NGDPD").assign(
-            indicator="Gross domestic product, current prices"
-        )
+        return self._get_indicator("NGDPD")
 
     def get_gdp_current_lcu(self) -> pd.DataFrame:
         """Indicator NGDP, Current"""
-        return self._get_indicator("NGDP").assign(
-            indicator="Gross domestic product, current LCU"
-        )
+        return self._get_indicator("NGDP")
 
     def get_general_gov_expenditure(self) -> pd.DataFrame:
         """Indicator GGX, Current"""
-        return self._get_indicator("GGX").assign(
-            indicator="General government total expenditure"
-        )
+        return self._get_indicator("GGX")
 
     def get_general_gov_revenue(self) -> pd.DataFrame:
         """Indicator GGR, Current"""
-        return self._get_indicator("GGR").assign(indicator="General government revenue")
+        return self._get_indicator("GGR")
 
     def inflation_acp(self) -> pd.DataFrame:
         """Indicator PCPI, Index"""
-        return self._get_indicator("PCPI").assign(
-            indicator="Inflation, average consumer prices"
-        )
+        return self._get_indicator("PCPI")
 
     def inflation_epcp(self) -> pd.DataFrame:
         """Indicator PCPIE, Index"""
-        return self._get_indicator("PCPIE").assign(
-            indicator="Inflation, end of period consumer prices"
-        )
+        return self._get_indicator("PCPIE")
 
     def inflation_gdp(self) -> pd.DataFrame:
-        return self._get_indicator("NGDP_D").assign(indicator="GDP, deflator")
+        return self._get_indicator("NGDP_D")
 
     def get_exchange(self) -> pd.DataFrame:
         """Implied exchange rate, usd per lcu"""
@@ -156,5 +158,5 @@ class IMFData:
         return (
             usd.merge(lcu, on=["iso_code", "year"], suffixes=("_usd", "_lcu"))
             .assign(xe=lambda d: d.value_usd / d.value_lcu)
-            .filter(["year","iso_code", "xe"], axis=1)
+            .filter(["year", "iso_code", "xe"], axis=1)
         )
