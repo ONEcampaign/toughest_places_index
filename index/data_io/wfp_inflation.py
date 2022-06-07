@@ -53,5 +53,26 @@ def refresh_inflation_data(iso_codes: list = None) -> None:
         )
 
 
+def read_inflation_data() -> pd.DataFrame:
+    """Read the stored inflation data"""
+
+    # get a list of iso_codes
+    iso_codes = cc.CountryConverter().data["ISO3"].unique()
+
+    df = pd.DataFrame()
+
+    for iso_code in iso_codes:
+        try:
+            _ = pd.read_csv(
+                rf"{PATHS.raw_wfp_inflation}/{iso_code}.csv", parse_dates=["date"]
+            )
+        except FileNotFoundError:
+            pass
+        df = pd.concat([df, _], ignore_index=True)
+
+    return df
+
+
 if __name__ == "__main__":
-    refresh_inflation_data()
+    # refresh_inflation_data()
+    data = read_inflation_data()
