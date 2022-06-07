@@ -3,6 +3,7 @@
 import pandas as pd
 import country_converter as coco
 from index import common
+from typing import Callable
 
 
 def __missing_prop(df: pd.DataFrame, target_col: str, grouping_col: str = None) -> dict:
@@ -15,7 +16,7 @@ def __missing_prop(df: pd.DataFrame, target_col: str, grouping_col: str = None) 
                 for group in df[grouping_col].unique()}
 
 
-def summarize_missing(df: pd.DataFrame, target_col:str, iso_col: str = 'iso_code', by: str = 'overall') -> dict:
+def summarize_missing(df: pd.DataFrame, target_col:str,by: str = 'overall', iso_col: str = 'iso_code') -> dict:
     """
     :param target_col:
     :param df:
@@ -48,6 +49,75 @@ def summarize_missing(df: pd.DataFrame, target_col:str, iso_col: str = 'iso_code
         case _:
             raise ValueError(f'Invalid parameter: {by}')
 
+
+
+
+def __3sigma_test(series: pd.Series) -> list:
+    """Uses the imperical rule to determine if a value is an outlier, returns a boolean list"""
+
+    return abs(series - series.mean()) > 3*series.std()
+
+
+def __iqr_test(series: pd.Series, factor: float = 2) -> list:
+    """
+    Uses Inter-quartile range test to determine if a value is an outlier
+    factor - set the magnitude to test
+    """
+
+    q25, q75 = series.quantile(0.25), series.quantile(0.75)
+    iqr = q75 - q25
+
+    return (series < (q25 - (iqr * factor)))|(series> (q75 + (iqr * factor)))
+
+def _get_outliers(df: pd.DataFrame, target_col: str, method: Callable = __3sigma_test, cluster_col: str = None):
+    """ """
+
+    if cluster_col is None:
+        df_outlier =  df[method(df[target_col])]
+
+    else:
+        df_outlier = pd.DataFrame()
+        for cluster in df[cluster_col].unique():
+            cluster_df = df[df[cluster_col] == cluster]
+            df_outlier = pd.concat([df_outlier, cluster_df[method(cluster_df[target_col])]], ignore_index=True)
+
+    return df_outlier
+
+
+
+def outliers(df: pd.DataFrame, target_col:str, method: Callable = __3sigma_test, cluster: str = None, iso_col: str = 'iso_code'):
+    """
+    
+    :param df:
+    :param target_col:
+    :param method:
+    :param cluster:
+    :param iso_col:
+    :return:
+    """
+
+    match cluster:
+        case None:
+            return _get_outliers(df, target_col, method)
+
+        case 'region':
+            return _get_outliers(df.assign(cluster = lambda d: coco.convert(d[iso_col], to='UNregion')),
+                          target_col, method, cluster_col= 'cluster'
+                          )
+
+        case 'continent':
+            return _get_outliers(df.assign(cluster = lambda d: coco.convert(d[iso_col], to='continent')),
+                                 target_col, method, cluster_col= 'cluster'
+                                 )
+
+        case 'income_group':
+            return _get_outliers(common.add_income_levels(df), target_col, method, cluster_col='income_level')
+
+        case 'country':
+            return _get_outliers(df, target_col, method, cluster_col=iso_col)
+
+        case _:
+            raise ValueError(f'Invalid parameter: {cluster}')
 
 
 
