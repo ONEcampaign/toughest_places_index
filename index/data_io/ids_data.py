@@ -157,4 +157,3 @@ class IDSData:
         self.load_raw_data().clean_ids_data(detail=detail, names_dict=names_dict)
 
         return self.data
-
