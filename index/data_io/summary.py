@@ -87,7 +87,7 @@ def _get_outliers(df: pd.DataFrame, target_col: str, method: Callable = __3sigma
 
 def outliers(df: pd.DataFrame, target_col:str, method: Callable = __3sigma_test, cluster: str = None, iso_col: str = 'iso_code'):
     """
-    
+
     :param df:
     :param target_col:
     :param method:
