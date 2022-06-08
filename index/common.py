@@ -1,5 +1,5 @@
 """Utility Functions"""
-
+import country_converter
 import os
 
 import country_converter as cc
@@ -266,3 +266,52 @@ def keep_only_valid_iso(df: pd.DataFrame) -> pd.DataFrame:
         print(f"The following iso_codes were dropped: \n {missing}")
 
     return df.loc[lambda d: d.iso_code.isin(valid_iso)].reset_index(drop=True)
+
+
+def _study_countries() -> list:
+    """Return a list of the countries being studied"""
+    return []
+
+
+def _no_hics_umics() -> list:
+    """Return a list of countries excluding hics and umics"""
+    return [
+        c
+        for c, lvl in income_levels().items()
+        if lvl not in ["High income", "Upper middle income"]
+    ]
+
+
+def _no_hics() -> list:
+    """Return a list of countries excluding hics and umics"""
+    return [c for c, lvl in income_levels().items() if lvl not in ["High income"]]
+
+
+def _africa_countries() -> list:
+    """Return a list of African countries"""
+    countries = cc.CountryConverter().get_correspondence_dict("ISO3", "continent")
+    return [c for c, cnt in countries.items() if cnt[0] == "Africa"]
+
+
+def _lics_countries() -> list:
+    """Return a list of LICS countries"""
+    return [c for c, lvl in income_levels().items() if lvl == "Low income"]
+
+
+def _lics_lmics_countries() -> list:
+    """Return a list of LICS and LMICs countries"""
+    return [
+        c
+        for c, lvl in income_levels().items()
+        if lvl in ["Low income", "Lower middle income"]
+    ]
+
+
+STUDY_COUNTRIES: dict[str, list] = {
+    "study": _study_countries(),
+    "no_hics": _no_hics(),
+    "no_hics_umics": _no_hics_umics(),
+    "africa": _africa_countries(),
+    "lics": _lics_countries(),
+    "lics_lmics": _lics_lmics_countries(),
+}
