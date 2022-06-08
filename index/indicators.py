@@ -32,7 +32,7 @@ def get_insufficient_food(refresh: bool = False) -> pd.DataFrame:
     return (
         read_hunger_data()
         .pipe(get_latest, by="iso_code")
-        .filter(["iso_code", "value"], axis=1)
+        .filter(["iso_code", "date", "value"], axis=1)
         .pipe(add_share_of_population, target_col="value")
     )
 
@@ -54,7 +54,7 @@ def get_inflation(refresh: bool = False, data_type: str = "headline") -> pd.Data
         read_inflation_data()
         .loc[lambda d: d.indicator == data_type]
         .pipe(get_latest, by="iso_code")
-        .filter(["iso_code", "value"], axis=1)
+        .filter(["iso_code", "date", "value"], axis=1)
     )
 
 
@@ -73,6 +73,7 @@ def get_economist_index(refresh: bool = False) -> pd.DataFrame:
     return (
         econ.get_overall_data()
         .filter(["iso_code", "score"], axis=1)
+        .assign(date=pd.to_datetime("2021-01-01"))
         .rename({"score": "value"}, axis=1)
     )
 
@@ -101,7 +102,7 @@ def get_wasting(refresh: bool = False) -> pd.DataFrame:
     # Keep only the WB data that is missing from the WFP data
     wb_ = wb_.loc[lambda d: ~d.iso_code.isin(wfp_.loc[wfp_.value.notna()].iso_code)]
 
-    return pd.concat([wfp_, wb_], ignore_index=True)
+    return pd.concat([wfp_, wb_], ignore_index=True).dropna().reset_index(drop=True)
 
 
 # --------------------------------------------------------------------------------------
@@ -115,7 +116,7 @@ def get_fiscal_reserves(refresh: bool = False) -> pd.DataFrame:
     return (
         wb_reserves(refresh=refresh)
         .pipe(get_latest, by="iso_code")
-        .filter(["iso_code", "value"], axis=1)
+        .filter(["iso_code", "date", "value"], axis=1)
     )
 
 
@@ -163,6 +164,6 @@ def get_service_spending_ratio(year: int) -> pd.DataFrame:
             spending, on=["iso_code"], how="left", suffixes=("_service", "_spending")
         )
         .assign(ratio=lambda d: round(100 * d.value_service / d.value_spending, 2))
-        .filter(["iso_code", "ratio"], axis=1)
-        .rename({"ratio": "value"}, axis=1)
+        .filter(["iso_code", "year", "ratio"], axis=1)
+        .rename({"ratio": "value", "year": "date"}, axis=1)
     )
