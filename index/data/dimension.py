@@ -17,18 +17,26 @@ class Dimension:
         """Add an indicator to the dataframe"""
         self.indicators.append(indicator)
 
-    def get_data(self, orient="wide") -> pd.DataFrame:
+    def get_data(self, orient="wide", with_date: bool = False) -> pd.DataFrame:
         """Return the stored data. An orientation can be passed ('wide' or 'long')"""
 
         df = pd.DataFrame()
 
         for indicator in self.indicators:
             df = pd.concat(
-                [df, indicator.get_data().assign(indicator=indicator.indicator_name)],
+                [
+                    df,
+                    indicator.get_data(with_date=with_date).assign(
+                        indicator=indicator.indicator_name
+                    ),
+                ],
                 ignore_index=True,
             )
 
         if orient == "wide":
+            if with_date:
+                raise ValueError("Cannot use with_date with wide orientation")
+
             return df.pivot(
                 index="iso_code", columns="indicator", values="value"
             ).reset_index(drop=False)

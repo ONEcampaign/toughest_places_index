@@ -40,4 +40,4 @@ df_dimension_1_long = dimension_1.get_data(orient="long")
 index = Index(dimensions=[dimension_1, dimension_2, dimension_3])
 
 # get the index data
-df_index = index.get_data(orient="long")
+df_index = index.get_data(orient="long", with_date=True)
