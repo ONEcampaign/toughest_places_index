@@ -254,3 +254,15 @@ def add_income_levels(
         .drop(columns=["id_"])
         .rename(columns={"income_level": target_col})
     )
+
+
+def keep_only_valid_iso(df: pd.DataFrame) -> pd.DataFrame:
+
+    valid_iso = cc.CountryConverter().get_correspondence_dict("ISO3", "name_short")
+
+    missing = {i for i in df.iso_code.unique() if i not in valid_iso}
+
+    if len(missing) > 0:
+        print(f"The following iso_codes were dropped: \n {missing}")
+
+    return df.loc[lambda d: d.iso_code.isin(valid_iso)].reset_index(drop=True)
