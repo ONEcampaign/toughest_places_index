@@ -270,7 +270,9 @@ def keep_only_valid_iso(df: pd.DataFrame) -> pd.DataFrame:
 
 def _study_countries() -> list:
     """Return a list of the countries being studied"""
-    return []
+
+    # for now, for example, no_hics
+    return _no_hics()
 
 
 def _no_hics_umics() -> list:
