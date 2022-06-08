@@ -15,6 +15,11 @@ def __missing_prop(df: pd.DataFrame, target_col: str, grouping_col: str = None) 
         return {group: (df.loc[df[grouping_col] == group, target_col].isna().sum()/len(df.loc[df[grouping_col] == group]))*100
                 for group in df[grouping_col].unique()}
 
+def missing_countries(df: pd.DataFrame, target_col:str, iso_col: str = 'iso_code') -> list:
+    """ """
+
+    return df.loc[df[target_col].isna(), iso_col].unique()
+
 
 def summarize_missing(df: pd.DataFrame, target_col:str,by: str = 'overall', iso_col: str = 'iso_code') -> dict:
     """
