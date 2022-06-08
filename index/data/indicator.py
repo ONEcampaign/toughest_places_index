@@ -24,6 +24,9 @@ class Indicator:
         else:
             self.dates: dict = {}
 
+        if df.duplicated(subset="iso_code").sum() != 0:
+            raise ValueError("Duplicate iso_code values in DataFrame")
+
     def __post_init__(self):
         self.__check_data(self.data)
         self.data = self.data.filter(REQUIRED_COLS, axis=1)
@@ -31,6 +34,8 @@ class Indicator:
     def get_data(self, with_date: bool = False) -> pd.DataFrame:
         """Return the stored data"""
         if with_date:
-            return self.data.assign(date=lambda d: d.iso_code.map(self.dates))
+            return self.data.assign(
+                date=lambda d: pd.to_datetime(d.iso_code.map(self.dates))
+            )
         else:
             return self.data
