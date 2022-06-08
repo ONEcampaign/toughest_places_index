@@ -11,7 +11,7 @@ class Index:
         """Add an indicator to the dataframe"""
         self.dimensions.append(indicator)
 
-    def get_data(self, orient="wide") -> pd.DataFrame:
+    def get_data(self, orient="wide", with_date: bool = False) -> pd.DataFrame:
         """Return the stored data. An orientation can be passed ('wide' or 'long')"""
 
         if orient not in ["wide", "long"]:
@@ -20,7 +20,7 @@ class Index:
         df = pd.DataFrame()
 
         for dimension in self.dimensions:
-            _ = dimension.get_data(orient=orient)
+            _ = dimension.get_data(orient=orient, with_date=with_date)
 
             if orient == "wide":
                 df = pd.concat([df, _.set_index("iso_code")], axis=1)

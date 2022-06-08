@@ -13,18 +13,29 @@ class Indicator:
     data: pd.DataFrame
     indicator_name: str
 
-    @staticmethod
-    def __check_data(df: pd.DataFrame) -> None:
+    def __check_data(self, df: pd.DataFrame) -> None:
         if not set(REQUIRED_COLS).issubset(set(df.columns)):
             raise KeyError(
                 f"{set(REQUIRED_COLS).difference(set(df.columns))} "
                 f"missing from DataFrame columns"
             )
+        if "date" in df.columns:
+            self.dates: dict = df.set_index("iso_code")["date"].to_dict()
+        else:
+            self.dates: dict = {}
+
+        if df.duplicated(subset="iso_code").sum() != 0:
+            raise ValueError("Duplicate iso_code values in DataFrame")
 
     def __post_init__(self):
         self.__check_data(self.data)
         self.data = self.data.filter(REQUIRED_COLS, axis=1)
 
-    def get_data(self) -> pd.DataFrame:
+    def get_data(self, with_date: bool = False) -> pd.DataFrame:
         """Return the stored data"""
-        return self.data
+        if with_date:
+            return self.data.assign(
+                date=lambda d: pd.to_datetime(d.iso_code.map(self.dates))
+            )
+        else:
+            return self.data
