@@ -17,14 +17,29 @@ from index.indicators import (
 from index.data.indicator import Indicator
 from index.data.dimension import Dimension
 
-# Crete individual indicators
-insufficient_food = Indicator(get_insufficient_food(), "Insufficient Food Consumption")
-inflation = Indicator(get_inflation(), "Headline Inflation")
-economist_index = Indicator(get_economist_index(), "Economist Index")
-wasting = Indicator(get_wasting(), "Wasting")
-fiscal_reserves = Indicator(get_fiscal_reserves(), "Fiscal Reserves minus gold")
+from index.common import STUDY_COUNTRIES
+
+countries = STUDY_COUNTRIES["no_hics"]
+
+# Crete individual indicators. Filter to a set of countries by using countries_list
+insufficient_food = Indicator(
+    get_insufficient_food(), "Insufficient Food Consumption", countries_list=countries
+)
+
+inflation = Indicator(get_inflation(), "Headline Inflation", countries_list=countries)
+
+economist_index = Indicator(
+    get_economist_index(), "Economist Index", countries_list=countries
+)
+
+wasting = Indicator(get_wasting(), "Wasting", countries_list=countries)
+
+fiscal_reserves = Indicator(
+    get_fiscal_reserves(), "Fiscal Reserves minus gold", countries_list=countries
+)
+
 service_spending_ratio = Indicator(
-    get_service_spending_ratio(2022), "Service Spending Ratio"
+    get_service_spending_ratio(2022), "Service Spending Ratio", countries_list=countries
 )
 
 # Create the dimensions

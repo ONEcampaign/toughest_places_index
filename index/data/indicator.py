@@ -13,6 +13,7 @@ REQUIRED_COLS: list = ["iso_code", "value"]
 class Indicator:
     data: pd.DataFrame
     indicator_name: str
+    countries_list: list[str] | None = None
 
     def __check_data(self, df: pd.DataFrame) -> None:
         if not set(REQUIRED_COLS).issubset(set(df.columns)):
@@ -29,8 +30,20 @@ class Indicator:
             raise ValueError("Duplicate iso_code values in DataFrame")
 
     def __post_init__(self):
+        # Check that the data is structured as required/expected
         self.__check_data(self.data)
+
+        # Keep only data with valid iso codes
         self.data = self.data.pipe(keep_only_valid_iso)
+
+        # Optionally reindex the dataframe so only countries under study are kept
+        if self.countries_list is not None:
+            self.data = (
+                self.data.set_index("iso_code")
+                .reindex(self.countries_list)
+                .reset_index(drop=False)
+            )
+        # Keep only the required columns for analysis
         self.data = self.data.filter(REQUIRED_COLS, axis=1)
 
     def get_data(self, with_date: bool = False) -> pd.DataFrame:
