@@ -69,23 +69,28 @@ def __iqr_test(series: pd.Series, factor: float = 2) -> list:
 
     return (series < (q25 - (iqr * factor)))|(series> (q75 + (iqr * factor)))
 
-def _get_outliers(df: pd.DataFrame, target_col: str, method: Callable = __3sigma_test, cluster_col: str = None):
+AVAILABLE_METHODS = {'empirical': __3sigma_test, 'inter_quartile_range': __iqr_test}
+
+def _get_outliers(df: pd.DataFrame, target_col: str, method: str = 'empirical', cluster_col: str = None):
     """ """
 
+    if method not in AVAILABLE_METHODS.keys():
+        raise ValueError(f'{method}: invalid method')
+    method_func = AVAILABLE_METHODS[method]
     if cluster_col is None:
-        df_outlier =  df[method(df[target_col])]
+        df_outlier =  df[method_func(df[target_col])]
 
     else:
         df_outlier = pd.DataFrame()
         for cluster in df[cluster_col].unique():
             cluster_df = df[df[cluster_col] == cluster]
-            df_outlier = pd.concat([df_outlier, cluster_df[method(cluster_df[target_col])]], ignore_index=True)
+            df_outlier = pd.concat([df_outlier, cluster_df[method_func(cluster_df[target_col])]], ignore_index=True)
 
     return df_outlier
 
 
 
-def outliers(df: pd.DataFrame, target_col:str, method: Callable = __3sigma_test, cluster: str = None, iso_col: str = 'iso_code'):
+def outliers(df: pd.DataFrame, target_col:str, method: str = 'empirical', cluster: str = None, iso_col: str = 'iso_code'):
     """
 
     :param df:
