@@ -42,15 +42,25 @@ def skl_minmax_scaler(
     return __skl_scaler(df, scaler_obj=MinMaxScaler, feature_range=feature_range)
 
 
-def skl_maxabs_scaler(df: pd.DataFrame, *) -> pd.DataFrame:
+def skl_maxabs_scaler(df: pd.DataFrame, **Kwargs) -> pd.DataFrame:
     """Scale each feature by its maximum absolute value."""
 
     return __skl_scaler(df, scaler_obj=MaxAbsScaler)
 
 
-def slk_robust_scaler(df: pd.DataFrame, *, with_centering:bool=True,
-                      with_scaling:bool=True, unit_variance:bool=False) -> pd.DataFrame:
+def slk_robust_scaler(
+    df: pd.DataFrame,
+    *,
+    with_centering: bool = True,
+    with_scaling: bool = True,
+    unit_variance: bool = False
+) -> pd.DataFrame:
     """Scale features using quantiles instead of percentiles."""
 
-    return __skl_scaler(df, scaler_obj=RobustScaler, with_centering=with_centering,
-                        with_scaling=with_scaling, unit_variance=unit_variance)
+    return __skl_scaler(
+        df,
+        scaler_obj=RobustScaler,
+        with_centering=with_centering,
+        with_scaling=with_scaling,
+        unit_variance=unit_variance,
+    )
