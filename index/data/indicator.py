@@ -4,6 +4,7 @@
 
 from dataclasses import dataclass
 import pandas as pd
+from index.common import keep_only_valid_iso
 
 REQUIRED_COLS: list = ["iso_code", "value"]
 
@@ -29,6 +30,7 @@ class Indicator:
 
     def __post_init__(self):
         self.__check_data(self.data)
+        self.data = self.data.pipe(keep_only_valid_iso)
         self.data = self.data.filter(REQUIRED_COLS, axis=1)
 
     def get_data(self, with_date: bool = False) -> pd.DataFrame:
