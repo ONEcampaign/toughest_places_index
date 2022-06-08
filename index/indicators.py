@@ -164,6 +164,6 @@ def get_service_spending_ratio(year: int) -> pd.DataFrame:
             spending, on=["iso_code"], how="left", suffixes=("_service", "_spending")
         )
         .assign(ratio=lambda d: round(100 * d.value_service / d.value_spending, 2))
-        .filter(["iso_code", "year","ratio"], axis=1)
-        .rename({"ratio": "value", "year":"date"}, axis=1)
+        .filter(["iso_code", "year", "ratio"], axis=1)
+        .rename({"ratio": "value", "year": "date"}, axis=1)
     )
