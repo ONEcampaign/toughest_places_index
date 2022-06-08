@@ -3,8 +3,10 @@
 import pandas as pd
 import country_converter as coco
 from index import common
-from typing import Callable
 
+# ====================================================
+# Missing data
+# ====================================================
 
 def __missing_prop(df: pd.DataFrame, target_col: str, grouping_col: str = None) -> dict:
     """returns percent of a column that is null, by specified groups"""
@@ -78,6 +80,23 @@ def summarize_missing(df: pd.DataFrame, target_col:str,by: str = 'overall', iso_
         case _:
             raise ValueError(f'Invalid parameter: {by}')
 
+
+def summarize_missing_full(df:pd.DataFrame, index_col:str = None) -> dict:
+    """calculate % missing across all columns in a dataframe
+    keep - specify the category and the group to keep eg {'income_level': 'Low income'}
+
+    """
+
+    if index_col is not None:
+        df = df.set_index(index_col)
+
+    return df.assign(missing = lambda d: (d.isna().sum(axis=1)/len(d.columns))*100)['missing'].to_dict()
+
+
+
+# ====================================================
+# outliers
+# ====================================================
 
 
 
