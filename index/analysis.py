@@ -33,11 +33,11 @@ dimension_2 = Dimension(indicators=[economist_index, wasting])
 dimension_3 = Dimension(indicators=[fiscal_reserves, service_spending_ratio])
 
 # to get a dataframe of all th eindicators in a dimension
-df_dimension_1 = dimension_1.get_data(orient='wide')
-df_dimension_1_long= dimension_1.get_data(orient='long')
+df_dimension_1 = dimension_1.get_data(orient="wide")
+df_dimension_1_long = dimension_1.get_data(orient="long")
 
 # Create the index object
 index = Index(dimensions=[dimension_1, dimension_2, dimension_3])
 
 # get the index data
-df_index = index.get_data(orient='long')
+df_index = index.get_data(orient="long")
