@@ -15,10 +15,34 @@ def __missing_prop(df: pd.DataFrame, target_col: str, grouping_col: str = None) 
         return {group: (df.loc[df[grouping_col] == group, target_col].isna().sum()/len(df.loc[df[grouping_col] == group]))*100
                 for group in df[grouping_col].unique()}
 
-def missing_countries(df: pd.DataFrame, target_col:str, iso_col: str = 'iso_code') -> list:
+
+def __missing_countries_subset(df: pd.DataFrame, target_col:str, subset_col:str, iso_col:str = 'iso_code'):
     """ """
 
-    return df.loc[df[target_col].isna(), iso_col].unique()
+    return {subset: df.loc[(df[subset_col] == subset)&(df[target_col].isna()), iso_col].unique()
+            for subset in df[subset_col].unique()}
+
+
+
+
+def missing_countries(df: pd.DataFrame, target_col:str, iso_col: str = 'iso_code', by = None) -> dict:
+    """ """
+    if by is None:
+        return {'overall': df.loc[df[target_col].isna(), iso_col].unique()}
+
+    elif by == 'continent':
+        df['subset'] = coco.convert(df[iso_col], to='continent')
+        return __missing_countries_subset(df, target_col, subset_col='subset')
+
+    elif by == 'region':
+        df['subset'] = coco.convert(df[iso_col], to='UNregion')
+        return __missing_countries_subset(df, target_col, subset_col='subset')
+
+    elif by == 'income_level':
+        return __missing_countries_subset(common.add_income_levels(df), target_col, subset_col='income_level')
+
+    else:
+        raise ValueError(f'{by}: invalid parameter')
 
 
 def summarize_missing(df: pd.DataFrame, target_col:str,by: str = 'overall', iso_col: str = 'iso_code') -> dict:
