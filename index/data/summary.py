@@ -254,4 +254,19 @@ def check_zeros(df: pd.DataFrame, target_col:str, by:str = None, iso_col:str = '
         raise ValueError(f'{by}: Invalid parameter')
 
 
+def collinearity(df:pd.DataFrame, bounds:list = (0.7, -0.7), index_col:str = None, variable:str = None):
+    """Returns a dictionary with variables as keys and correlated variables in a list as values"""
+
+
+    if index_col is not None:
+        df = df.set_index(index_col)
+
+    corr_df = df.corr()
+    if variable is None:
+        return {var: list(corr_df[((corr_df[var] >= bounds[0])|(corr_df[var]<=bounds[1]))
+                                  &(corr_df[var].index!=var)].index)
+                for var in corr_df.columns}
+    else:
+        return {variable: list(corr_df[((corr_df[variable] >= bounds[0])|(corr_df[variable]<=bounds[1]))
+                                &(corr_df[variable].index!=variable)].index)}
 
