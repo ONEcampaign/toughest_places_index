@@ -218,3 +218,40 @@ def outliers(
 
         case _:
             raise ValueError(f"Invalid parameter: {cluster}")
+
+
+
+
+def __zero_subset(
+        df: pd.DataFrame, target_col: str, subset_col: str
+):
+    """ """
+
+    return {subset: (len(df[(df[subset_col] == subset)&(df[target_col] == 0)])
+              / len(df[df[subset_col] == subset]))*100
+            for subset in df[subset_col].unique()}
+
+
+
+def check_zeros(df: pd.DataFrame, target_col:str, by:str = None, iso_col:str = 'iso_code'):
+    """ """
+
+    if by is None:
+        return {'overall': (len(df[df[target_col] == 0])/len(df))*100}
+
+    elif by == 'region':
+        return __zero_subset(df.assign(group = lambda d: coco.convert(d[iso_col], to = 'UNregion')),
+                             target_col, 'group')
+    elif by == 'continent':
+        return __zero_subset(df.assign(group = lambda d: coco.convert(d[iso_col], to = 'continent')),
+                             target_col, 'group')
+    elif by == 'income_level':
+        return __zero_subset(common.add_income_levels(df).dropna(subset = 'income_level'), target_col, 'income_level')
+
+    elif by == 'country':
+        return __zero_subset(df, target_col, iso_col)
+    else:
+        raise ValueError(f'{by}: Invalid parameter')
+
+
+
