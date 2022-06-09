@@ -30,7 +30,8 @@ class Index:
         self.data = IMPUTERS[method](self.get_data(), **kwargs)
 
     def index_data(
-        self, *, rescale_parameters: dict = None, impute_parameters: dict = None
+        self, *, rescale_parameters: dict = None, impute_parameters: dict = None,
+            summarised:bool = True
     ) -> None:
         """Produce a basic index using the data and parameters"""
         if rescale_parameters is None:
@@ -42,8 +43,17 @@ class Index:
         self.rescale(**rescale_parameters)
         self.impute_missing_data(**impute_parameters)
 
+        # If less is better, invert the data for that indicator.
+        # Given some rescaling strategies, it may be better to do 100-x instead of x*-1
+        for dimension in self.dimensions:
+            for indicator in dimension.indicators:
+                if not indicator.more_is_worse:
+                    self.data[indicator.indicator_name] *= -1
+
         # For testing, a simple equally weighted average
-        self.data = self.data.mean(axis=1).sort_values(ascending=False)
+        if summarised:
+            self.data = self.data.mean(axis=1).sort_values(ascending=False)
+
 
     def get_data(self, orient="wide", with_date: bool = False) -> pd.DataFrame:
         """Return the stored data. An orientation can be passed ('wide' or 'long')"""

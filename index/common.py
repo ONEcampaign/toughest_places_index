@@ -272,7 +272,37 @@ def _study_countries() -> list:
     """Return a list of the countries being studied"""
 
     # for now, for example, no_hics
-    return _no_hics()
+    countries = _no_hics_umics()
+    [
+        countries.append(c)
+        for c in [
+            "DOM",
+            "JOR",
+            "GTM",
+            "ECU",
+            "TUR",
+            "BWA",
+            "PER",
+            "BRA",
+            "KAZ",
+            "ARG",
+            "PRY",
+            "ROU",
+            "MDA",
+            "ARM",
+            "SRB",
+            "THA",
+            "PAN",
+            "BGR",
+            "CRI",
+            "COL",
+            "CHN",
+            "ZAF",
+            "BLR",
+            "FJI",
+        ]
+    ]
+    return countries
 
 
 def _no_hics_umics() -> list:
