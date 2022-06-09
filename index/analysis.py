@@ -38,7 +38,7 @@ def get_dimensions() -> tuple:
         "Insufficient Food Consumption",
         countries_list=countries,
     )
-    #insufficient_food.raw_data = insufficient_food.raw_data.fillna(0)
+    # insufficient_food.raw_data = insufficient_food.raw_data.fillna(0)
 
     inflation = Indicator(
         get_inflation(), "Headline Inflation", countries_list=countries
@@ -89,7 +89,7 @@ def index_version(
     return res
 
 
-def main(dimensions:tuple):
+def main(dimensions: tuple):
 
     versions = {
         "robust and knn15": (
@@ -154,6 +154,7 @@ def main(dimensions:tuple):
     with pd.ExcelWriter(PATHS.data + r"/results.xlsx") as writer:
         for result_n, result in results.items():
             result.to_excel(writer, sheet_name=result_n)
+
 
 if __name__ == "__main__":
     dimensions_raw = get_dimensions()

@@ -118,7 +118,7 @@ def get_fiscal_reserves(refresh: bool = False) -> pd.DataFrame:
         .pipe(get_latest, by="iso_code")
         .filter(["iso_code", "date", "value"], axis=1)
         .pipe(add_share_of_population, target_col="value")
-        .assign(value=lambda d: d.value/100)
+        .assign(value=lambda d: d.value / 100)
     )
 
 

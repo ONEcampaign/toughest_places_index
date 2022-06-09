@@ -30,8 +30,11 @@ class Index:
         self.data = IMPUTERS[method](self.get_data(), **kwargs)
 
     def index_data(
-        self, *, rescale_parameters: dict = None, impute_parameters: dict = None,
-            summarised:bool = True
+        self,
+        *,
+        rescale_parameters: dict = None,
+        impute_parameters: dict = None,
+        summarised: bool = True,
     ) -> None:
         """Produce a basic index using the data and parameters"""
         if rescale_parameters is None:
@@ -53,7 +56,6 @@ class Index:
         # For testing, a simple equally weighted average
         if summarised:
             self.data = self.data.mean(axis=1).sort_values(ascending=False)
-
 
     def get_data(self, orient="wide", with_date: bool = False) -> pd.DataFrame:
         """Return the stored data. An orientation can be passed ('wide' or 'long')"""
