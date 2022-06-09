@@ -162,13 +162,14 @@ def __iqr_test(series: pd.Series) -> list:
     factor - set the magnitude to test
     """
 
-    multiplier = 1.5 #iqr multiplier
+    multiplier = 1.5  # iqr multiplier
     q25, q75 = series.quantile(0.25), series.quantile(0.75)
     iqr = q75 - q25
 
     return (series < (q25 - (iqr * multiplier))) | (series > (q75 + (iqr * multiplier)))
 
-#outlier methods
+
+# outlier methods
 AVAILABLE_METHODS = {"empirical": __3sigma_test, "inter_quartile_range": __iqr_test}
 
 
@@ -266,18 +267,23 @@ def outliers(
 # Zero values
 # ====================================================
 
-def __zero_subset(
-        df: pd.DataFrame, target_col: str, subset_col: str
-) -> dict:
+
+def __zero_subset(df: pd.DataFrame, target_col: str, subset_col: str) -> dict:
     """calculates proportion of 0 values for subsets of a dataframe"""
 
-    return {subset: (len(df[(df[subset_col] == subset)&(df[target_col] == 0)])
-              / len(df[df[subset_col] == subset]))*100
-            for subset in df[subset_col].unique()}
+    return {
+        subset: (
+            len(df[(df[subset_col] == subset) & (df[target_col] == 0)])
+            / len(df[df[subset_col] == subset])
+        )
+        * 100
+        for subset in df[subset_col].unique()
+    }
 
 
-
-def check_zeros(df: pd.DataFrame, target_col:str, by:str = None, iso_col:str = 'iso_code') -> dict:
+def check_zeros(
+    df: pd.DataFrame, target_col: str, by: str = None, iso_col: str = "iso_code"
+) -> dict:
     """
     Calculated proportion of a dataframe (by specific country grouping) that has 0 values
 
@@ -295,28 +301,44 @@ def check_zeros(df: pd.DataFrame, target_col:str, by:str = None, iso_col:str = '
     """
 
     if by is None:
-        return {'overall': (len(df[df[target_col] == 0])/len(df))*100}
+        return {"overall": (len(df[df[target_col] == 0]) / len(df)) * 100}
 
-    elif by == 'region':
-        return __zero_subset(df.assign(group = lambda d: coco.convert(d[iso_col], to = 'UNregion')),
-                             target_col, 'group')
-    elif by == 'continent':
-        return __zero_subset(df.assign(group = lambda d: coco.convert(d[iso_col], to = 'continent')),
-                             target_col, 'group')
-    elif by == 'income_level':
-        return __zero_subset(common.add_income_levels(df).dropna(subset = 'income_level'), target_col, 'income_level')
+    elif by == "region":
+        return __zero_subset(
+            df.assign(group=lambda d: coco.convert(d[iso_col], to="UNregion")),
+            target_col,
+            "group",
+        )
+    elif by == "continent":
+        return __zero_subset(
+            df.assign(group=lambda d: coco.convert(d[iso_col], to="continent")),
+            target_col,
+            "group",
+        )
+    elif by == "income_level":
+        return __zero_subset(
+            common.add_income_levels(df).dropna(subset="income_level"),
+            target_col,
+            "income_level",
+        )
 
-    elif by == 'country':
+    elif by == "country":
         return __zero_subset(df, target_col, iso_col)
     else:
-        raise ValueError(f'{by}: Invalid parameter')
+        raise ValueError(f"{by}: Invalid parameter")
 
 
 # ====================================================
 # Correlation
 # ====================================================
 
-def collinearity(df:pd.DataFrame, bounds:tuple = (0.7, -0.7), index_col:str = None, column:str = None) -> dict:
+
+def collinearity(
+    df: pd.DataFrame,
+    bounds: tuple = (0.7, -0.7),
+    index_col: str = None,
+    column: str = None,
+) -> dict:
     """
     Returns a dictionary with variables as keys and correlated variables in a list as values, using pearson correlation
 
@@ -339,10 +361,21 @@ def collinearity(df:pd.DataFrame, bounds:tuple = (0.7, -0.7), index_col:str = No
     corr_df = df.corr()
 
     if column is None:
-        return {var: list(corr_df[((corr_df[var] >= bounds[0])|(corr_df[var]<=bounds[1]))
-                                  &(corr_df[var].index!=var)].index)
-                for var in corr_df.columns}
+        return {
+            var: list(
+                corr_df[
+                    ((corr_df[var] >= bounds[0]) | (corr_df[var] <= bounds[1]))
+                    & (corr_df[var].index != var)
+                ].index
+            )
+            for var in corr_df.columns
+        }
     else:
-        return {column: list(corr_df[((corr_df[column] >= bounds[0])|(corr_df[column]<=bounds[1]))
-                                &(corr_df[column].index!=column)].index)}
-
+        return {
+            column: list(
+                corr_df[
+                    ((corr_df[column] >= bounds[0]) | (corr_df[column] <= bounds[1]))
+                    & (corr_df[column].index != column)
+                ].index
+            )
+        }
