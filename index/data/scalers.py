@@ -64,3 +64,11 @@ def slk_robust_scaler(
         with_scaling=with_scaling,
         unit_variance=unit_variance,
     )
+
+
+SCALERS: dict = {
+    "standard": skl_standard_scaler,
+    "minmax": skl_minmax_scaler,
+    "maxabs": skl_maxabs_scaler,
+    "robust": slk_robust_scaler,
+}
