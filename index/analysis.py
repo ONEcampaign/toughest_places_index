@@ -50,3 +50,4 @@ dimension_3 = Dimension(indicators=[fiscal_reserves, service_spending_ratio])
 # Create the index object
 index = Index(dimensions=[dimension_1, dimension_2, dimension_3])
 
+index.index_data()

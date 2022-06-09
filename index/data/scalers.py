@@ -23,7 +23,7 @@ def __skl_scaler(df: pd.DataFrame, *, scaler_obj: Any, **kwargs) -> pd.DataFrame
         scaler.fit_transform(df.values), columns=df.columns, index=df.index
     )
 
-    return df
+    return df.reset_index(drop=False)
 
 
 def skl_standard_scaler(

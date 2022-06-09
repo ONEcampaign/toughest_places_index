@@ -42,6 +42,9 @@ class Index:
         self.rescale(**rescale_parameters)
         self.impute_missing_data(**impute_parameters)
 
+        # For testing, a simple equally weighted average
+        self.data = self.data.mean(axis=1).sort_values(ascending=False)
+
     def get_data(self, orient="wide", with_date: bool = False) -> pd.DataFrame:
         """Return the stored data. An orientation can be passed ('wide' or 'long')"""
 
