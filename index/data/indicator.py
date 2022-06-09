@@ -15,6 +15,7 @@ REQUIRED_COLS: list = ["iso_code", "value"]
 class Indicator:
     raw_data: pd.DataFrame
     indicator_name: str
+    more_is_worse: bool = True
     data: pd.DataFrame = None
     countries_list: list[str] | None = None
 
