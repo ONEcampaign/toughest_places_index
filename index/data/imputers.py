@@ -124,3 +124,13 @@ def one_income_imputer(
     df = df.assign(grouper=lambda d: d.index.map(common.income_levels()))
 
     return __one_imputer(df, strategy=strategy)
+
+
+IMPUTERS: dict = {
+    "simple": skl_simple_imputer,
+    "iterative": skl_iterative_imputer,
+    "knn": skl_knn_imputer,
+    "region": one_region_imputer,
+    "continent": one_continent_imputer,
+    "income": one_income_imputer,
+}
