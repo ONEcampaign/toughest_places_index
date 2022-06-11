@@ -26,6 +26,7 @@ from index.common import add_short_names
 import pandas as pd
 
 countries = STUDY_COUNTRIES["lics_lmics"]
+countries = [c for c in countries if c not in ["KIR", "FSM", "PRK", "WSM"]]
 
 # Crete individual indicators. Filter to a set of countries by using countries_list
 
@@ -158,4 +159,7 @@ def main(dimensions: tuple):
 
 if __name__ == "__main__":
     dimensions_raw = get_dimensions()
-    main(dimensions=dimensions_raw)
+    # main(dimensions=dimensions_raw)
+    d1, d2, d3 = dimensions_raw
+    index = Index(dimensions=[d1, d2, d3])
+    md = index.check_missing_data()
