@@ -6,6 +6,8 @@ from sklearn.preprocessing import (
     MinMaxScaler,
     MaxAbsScaler,
     RobustScaler,
+    QuantileTransformer,
+    PowerTransformer,
 )
 
 
@@ -48,6 +50,18 @@ def skl_maxabs_scaler(df: pd.DataFrame, **Kwargs) -> pd.DataFrame:
     return __skl_scaler(df, scaler_obj=MaxAbsScaler)
 
 
+def skl_quantile_transformer(
+    df: pd.DataFrame, *, n_quantiles: int = 200, output_distribution: str = "normal"
+) -> pd.DataFrame:
+    return __skl_scaler(df, scaler_obj=QuantileTransformer)
+
+
+def skl_power_transformer(
+    df: pd.DataFrame, *, method: str = "yeo-johnson"
+) -> pd.DataFrame:
+    return __skl_scaler(df, scaler_obj=PowerTransformer)
+
+
 def slk_robust_scaler(
     df: pd.DataFrame,
     *,
@@ -71,4 +85,6 @@ SCALERS: dict = {
     "minmax": skl_minmax_scaler,
     "maxabs": skl_maxabs_scaler,
     "robust": slk_robust_scaler,
+    "quantile": skl_quantile_transformer,
+    "power": skl_power_transformer,
 }
