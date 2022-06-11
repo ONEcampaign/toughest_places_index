@@ -1,3 +1,4 @@
+import copy
 from dataclasses import dataclass, field
 from index.data.dimension import Dimension
 import pandas as pd
@@ -60,6 +61,86 @@ class Index:
         """Check for missing data in the data"""
         return pd.DataFrame([self.get_data().pipe(summarize_missing_full)]).T
 
+    def index_dev(
+        self,
+        rescale_parameters: dict = None,
+        impute_parameters: dict = None,
+    ) -> pd.DataFrame:
+
+        original = copy.deepcopy(self)
+        original = original.get_data()
+
+        self.index_data(
+            rescale_parameters=rescale_parameters,
+            impute_parameters=impute_parameters,
+            summarised=False,
+        )
+        indexed = self.get_data()
+
+        cols = original.columns
+        new_cols = []
+        for col in cols:
+            new_cols.append(col)
+            new_cols.append(f"{col}_raw")
+
+        df = indexed.merge(
+            original,
+            left_index=True,
+            right_index=True,
+            how="left",
+            suffixes=("", "_raw"),
+        )
+        df = df.filter(new_cols, axis=1)
+        return df
+
+    def tune_neighbors(self, rescale_parameters: dict, n_neighbors: int) -> float:
+        """Tune the number of neighbors for the imputation method"""
+        import numpy as np
+
+        # Rescale the dataset
+        self.rescale(**rescale_parameters)
+
+        def __neighbours_test(n: int) -> float:
+            # Make a copy of the data
+            new = copy.deepcopy(self)
+
+            # Track the introduced missing data
+
+            changed_data = {}
+            # introduce a few errors
+            for dimension in new.dimensions:
+                for indicator in dimension.indicators:
+                    to_change = indicator.data.sample(frac=0.05)
+                    indicator.data.iloc[to_change.index, 1] = np.nan
+                    changed_data[indicator.indicator_name] = to_change
+
+            # impute the changed data
+            new.impute_missing_data(method="knn", n_neighbors=n)
+
+            df = pd.DataFrame()
+            # check the errors
+            for col in new.data.columns:
+                changed = new.data.iloc[changed_data[col].index, 1]
+                original = changed_data[col]
+                _ = pd.DataFrame({"changed": changed}).reset_index()
+                _ = original.merge(_, on="iso_code").rename(
+                    columns={"value": "original"}
+                )
+                _["indicator"] = col
+                df = pd.concat([df, _], ignore_index=True)
+
+            df["difference"] = round(
+                100 * abs(df.original - df.changed) / df.original, 1
+            )
+
+            return df.replace(np.inf, np.nan).difference.mean()
+
+        results = []
+        for version in range(500):
+            results.append(__neighbours_test(n=n_neighbors))
+
+        return round(sum(results) / len(results),1)
+
     def index_data(
         self,
         *,
@@ -69,7 +150,7 @@ class Index:
     ) -> None:
         """Produce a basic index using the data and parameters"""
         if rescale_parameters is None:
-            rescale_parameters = {"scaler_name": "standard"}
+            rescale_parameters = {"scaler_name": "quantile"}
 
         if impute_parameters is None:
             impute_parameters = {"method": "knn", "n_neighbors": 15}
