@@ -3,6 +3,12 @@ from index.data.dimension import Dimension
 import pandas as pd
 
 from index.data.imputers import IMPUTERS
+from index.data.summary import (
+    collinearity,
+    check_zeros,
+    outliers,
+    summarize_missing_full,
+)
 
 
 @dataclass
@@ -28,6 +34,31 @@ class Index:
             )
 
         self.data = IMPUTERS[method](self.get_data(), **kwargs)
+
+    def check_collinearity(self, **kwargs) -> dict:
+        """Check for collinearity in the data"""
+        return self.get_data().pipe(collinearity, **kwargs)
+
+    def check_zeros(self, target_col: str) -> dict:
+        """Check for zeros in the data"""
+        return self.get_data().pipe(check_zeros, target_col=target_col)
+
+    def check_outliers(self, method: str = "empirical", cluster: str = None) -> dict:
+        """Check for outliers in the data"""
+
+        out = {}
+
+        for dimension in self.dimensions:
+            for indicator in dimension.indicators:
+                out[indicator.indicator_name] = indicator.get_data().pipe(
+                    outliers, target_col="value", method=method, cluster=cluster
+                )
+
+        return out
+
+    def check_missing_data(self) -> pd.DataFrame:
+        """Check for missing data in the data"""
+        return pd.DataFrame([self.get_data().pipe(summarize_missing_full)]).T
 
     def index_data(
         self,
