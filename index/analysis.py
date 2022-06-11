@@ -74,12 +74,16 @@ def get_dimensions() -> tuple:
     return dimension_1, dimension_2, dimension_3
 
 
+def get_index(dimensions_tup: tuple) -> Index:
+    dimension_1, dimension_2, dimension_3 = dimensions_tup
+    return Index(dimensions=[dimension_1, dimension_2, dimension_3])
+
+
 def index_version(
     dimensions_tup: tuple, rescale_parameters: dict, impute_parameters: dict
 ) -> pd.DataFrame:
+    index = get_index(dimensions_tup)
 
-    dimension_1, dimension_2, dimension_3 = dimensions_tup
-    index = Index(dimensions=[dimension_1, dimension_2, dimension_3])
     index.index_data(
         rescale_parameters=rescale_parameters, impute_parameters=impute_parameters
     )
@@ -93,57 +97,9 @@ def index_version(
 def main(dimensions: tuple):
 
     versions = {
-        "robust and knn15": (
-            {"scaler_name": "robust"},
-            {"method": "knn", "n_neighbors": 15},
-        ),
         "robust and knn10": (
-            {"scaler_name": "robust"},
+            {"scaler_name": "quantile"},
             {"method": "knn", "n_neighbors": 10},
-        ),
-        "robust and knn5": (
-            {"scaler_name": "robust"},
-            {"method": "knn", "n_neighbors": 5},
-        ),
-        "standard and knn15": (
-            {"scaler_name": "standard"},
-            {"method": "knn", "n_neighbors": 15},
-        ),
-        "standard and knn5": (
-            {"scaler_name": "standard"},
-            {"method": "knn", "n_neighbors": 5},
-        ),
-        "minmax and knn15": (
-            {"scaler_name": "minmax"},
-            {"method": "knn", "n_neighbors": 15},
-        ),
-        "minmax and knn5": (
-            {"scaler_name": "minmax"},
-            {"method": "knn", "n_neighbors": 5},
-        ),
-        "robust and iterative": (
-            {"scaler_name": "robust"},
-            {"method": "iterative"},
-        ),
-        "standard and iterative": (
-            {"scaler_name": "standard"},
-            {"method": "iterative"},
-        ),
-        "minmax and iterative": (
-            {"scaler_name": "minmax"},
-            {"method": "iterative"},
-        ),
-        "robust and region": (
-            {"scaler_name": "robust"},
-            {"method": "region"},
-        ),
-        "robust and income": (
-            {"scaler_name": "robust"},
-            {"method": "income"},
-        ),
-        "robust and continent": (
-            {"scaler_name": "robust"},
-            {"method": "continent"},
         ),
     }
 
@@ -152,14 +108,11 @@ def main(dimensions: tuple):
         for version_n, version in versions.items()
     }
 
-    with pd.ExcelWriter(PATHS.data + r"/results.xlsx") as writer:
+    with pd.ExcelWriter(PATHS.data + r"/results2.xlsx") as writer:
         for result_n, result in results.items():
             result.to_excel(writer, sheet_name=result_n)
 
 
 if __name__ == "__main__":
     dimensions_raw = get_dimensions()
-    # main(dimensions=dimensions_raw)
-    d1, d2, d3 = dimensions_raw
-    index = Index(dimensions=[d1, d2, d3])
-    md = index.check_missing_data()
+    main(dimensions_raw)
