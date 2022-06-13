@@ -35,14 +35,14 @@ def get_dimensions() -> tuple:
     """Return a list of indicators"""
 
     insufficient_food = Indicator(
-        get_insufficient_food(),
+        get_insufficient_food(refresh=False),
         "Insufficient Food Consumption",
         countries_list=countries,
     )
     # insufficient_food.raw_data = insufficient_food.raw_data.fillna(0)
 
     inflation = Indicator(
-        get_inflation(), "Headline Inflation", countries_list=countries
+        get_inflation(refresh=False), "Headline Inflation", countries_list=countries
     )
 
     economist_index = Indicator(
@@ -52,10 +52,10 @@ def get_dimensions() -> tuple:
         more_is_worse=False,
     )
 
-    wasting = Indicator(get_wasting(), "Wasting", countries_list=countries)
+    wasting = Indicator(get_wasting(refresh=False), "Wasting", countries_list=countries)
 
     fiscal_reserves = Indicator(
-        get_fiscal_reserves(),
+        get_fiscal_reserves(refresh=False),
         "Fiscal Reserves minus gold",
         countries_list=countries,
         more_is_worse=False,
@@ -115,4 +115,17 @@ def main(dimensions: tuple):
 
 if __name__ == "__main__":
     dimensions_raw = get_dimensions()
-    main(dimensions_raw)
+    index = Index(dimensions=list(copy.deepcopy(dimensions_raw)))
+
+    index.index_data(summarised=False)
+    results = index.get_data().reset_index()
+    results_s = index.rescale_index()
+
+    index_raw = Index(dimensions=list(copy.deepcopy(dimensions_raw)))
+    data_raw = index_raw.get_data()
+    data_raw = data_raw.reset_index()
+
+    df = data_raw.merge(results_s, on="iso_code")
+    df = df.set_index("iso_code")
+    df = df.reset_index().pipe(add_short_names)
+    #c = df.corr()

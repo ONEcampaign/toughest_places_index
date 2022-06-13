@@ -139,7 +139,7 @@ class Index:
         for version in range(500):
             results.append(__neighbours_test(n=n_neighbors))
 
-        return round(sum(results) / len(results),1)
+        return round(sum(results) / len(results), 1)
 
     def index_data(
         self,
@@ -168,6 +168,26 @@ class Index:
         # For testing, a simple equally weighted average
         if summarised:
             self.data = self.data.mean(axis=1).sort_values(ascending=False)
+
+    def rescale_index(self) -> None:
+        """Rescale the index using the data"""
+        data = self.data.copy()
+
+        # find the minimum possible score
+        min_scores = [data[c].min() for c in data.columns]
+        min_score = sum(min_scores) / len(min_scores)
+        max_scores = [data[c].max() for c in data.columns]
+        max_score = sum(max_scores) / len(max_scores)
+
+        range_ = max_score - min_score
+
+        # rescale the data
+        r_data = self.data.mean(axis=1).sort_values(ascending=False).reset_index()
+        r_data.columns = ["iso_code", "score"]
+        r_data.score += abs(min_score)
+        r_data.score = round(100*r_data.score / range_,1)
+
+        return r_data.set_index("iso_code")
 
     def get_data(self, orient="wide", with_date: bool = False) -> pd.DataFrame:
         """Return the stored data. An orientation can be passed ('wide' or 'long')"""
