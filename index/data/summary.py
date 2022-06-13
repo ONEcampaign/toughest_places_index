@@ -1,8 +1,75 @@
 """Summary Statistics functions"""
 
 import pandas as pd
+import numpy as np
 import country_converter as coco
 from index import common
+from typing import Union
+
+
+def add_grouping_col(df: pd.DataFrame, group_by:str, iso_col: str = 'iso_code'):
+    """ """
+
+    match group_by:
+        case 'iso_code':
+            return df.assign(grouping = lambda d: d[iso_col]).dropna(subset = 'grouping').reset_index(drop=True)
+
+        case 'country':
+            return df.assign(grouping = lambda d: coco.convert(d[iso_col], to = 'name_short', not_found = np.nan)).dropna(subset = 'grouping').reset_index(drop=True)
+
+        case 'continent':
+            return df.assign(grouping = lambda d: coco.convert(d[iso_col], to = 'continent', not_found = np.nan)).dropna(subset = 'grouping').reset_index(drop=True)
+
+        case 'UNregion':
+            return df.assign(grouping = lambda d: coco.convert(d[iso_col], to = 'UNregion', not_found = np.nan)).dropna(subset = 'grouping').reset_index(drop=True)
+
+        case 'income_level':
+            return common.add_income_levels(df, target_col = 'grouping').dropna(subset = 'grouping').reset_index(drop=True)
+        case _:
+            raise ValueError(f"Invalid parameter 'by': {group_by}")
+
+
+
+
+def missing_by_column(df: pd.DataFrame, target_col: str, group_by: str = None, iso_col:str = 'iso_code') -> dict:
+    """ """
+
+    if group_by is None:
+        return {'overall': round(df[target_col].isna().sum()/len(df), 2)}
+    else:
+        df = add_grouping_col(df, group_by, iso_col)
+        return {group: round(df.loc[df['grouping'] == group, target_col].isna().sum()/len(df[df['grouping'] == group]), 2)
+                for group in df['grouping'].unique()}
+
+
+
+def missing_by_row(df: pd.DataFrame, index_cols: Union[str, list] = 'iso_code') -> dict:
+    """ """
+
+    if index_cols is not None:
+        df = df.set_index(index_cols)
+
+    return (df.isna().sum(axis = 1)/len(df.columns)).to_dict()
+
+
+def missing_country_list(df: pd.DataFrame, target_col: str, group_by: str = None, iso_col:str = 'iso_code') -> dict:
+    """ """
+
+    if group_by is None:
+        return {'overall': df.loc[df[target_col].isna(), iso_col].unique()}
+    else:
+        df = add_grouping_col(df, group_by, iso_col)
+        return {group: list(df.loc[(df[target_col].isna())&(df['grouping'] == group), iso_col].unique()) for group in df['grouping'].unique()}
+
+
+
+
+
+
+
+
+
+
 
 # ====================================================
 # Missing data
