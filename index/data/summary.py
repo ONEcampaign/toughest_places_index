@@ -7,7 +7,7 @@ from index import common
 from typing import Union
 
 
-def add_grouping_col(df: pd.DataFrame, group_by:str, iso_col: str = 'iso_code'):
+def add_grouping_col(df: pd.DataFrame, group_by: str, iso_col: str = "iso_code"):
     """
     Adds a column for country groups to a dataframe
 
@@ -22,27 +22,59 @@ def add_grouping_col(df: pd.DataFrame, group_by:str, iso_col: str = 'iso_code'):
     """
 
     match group_by:
-        case 'iso_code':
-            return df.assign(grouping = lambda d: d[iso_col]).dropna(subset = 'grouping').reset_index(drop=True)
+        case "iso_code":
+            return (
+                df.assign(grouping=lambda d: d[iso_col])
+                .dropna(subset="grouping")
+                .reset_index(drop=True)
+            )
 
-        case 'country':
-            return df.assign(grouping = lambda d: coco.convert(d[iso_col], to = 'name_short', not_found = np.nan)).dropna(subset = 'grouping').reset_index(drop=True)
+        case "country":
+            return (
+                df.assign(
+                    grouping=lambda d: coco.convert(
+                        d[iso_col], to="name_short", not_found=np.nan
+                    )
+                )
+                .dropna(subset="grouping")
+                .reset_index(drop=True)
+            )
 
-        case 'continent':
-            return df.assign(grouping = lambda d: coco.convert(d[iso_col], to = 'continent', not_found = np.nan)).dropna(subset = 'grouping').reset_index(drop=True)
+        case "continent":
+            return (
+                df.assign(
+                    grouping=lambda d: coco.convert(
+                        d[iso_col], to="continent", not_found=np.nan
+                    )
+                )
+                .dropna(subset="grouping")
+                .reset_index(drop=True)
+            )
 
-        case 'UNregion':
-            return df.assign(grouping = lambda d: coco.convert(d[iso_col], to = 'UNregion', not_found = np.nan)).dropna(subset = 'grouping').reset_index(drop=True)
+        case "UNregion":
+            return (
+                df.assign(
+                    grouping=lambda d: coco.convert(
+                        d[iso_col], to="UNregion", not_found=np.nan
+                    )
+                )
+                .dropna(subset="grouping")
+                .reset_index(drop=True)
+            )
 
-        case 'income_level':
-            return common.add_income_levels(df, target_col = 'grouping').dropna(subset = 'grouping').reset_index(drop=True)
+        case "income_level":
+            return (
+                common.add_income_levels(df, target_col="grouping")
+                .dropna(subset="grouping")
+                .reset_index(drop=True)
+            )
         case _:
             raise ValueError(f"Invalid parameter 'by': {group_by}")
 
 
-
-
-def missing_by_column(df: pd.DataFrame, target_col: str, group_by: str = None, iso_col:str = 'iso_code') -> dict:
+def missing_by_column(
+    df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
+) -> dict:
     """
     Calculates proportions of missing in a column
 
@@ -60,11 +92,18 @@ def missing_by_column(df: pd.DataFrame, target_col: str, group_by: str = None, i
     """
 
     if group_by is None:
-        return {'overall': round(df[target_col].isna().sum()/len(df), 2)}
+        return {"overall": round(df[target_col].isna().sum() / len(df), 2)}
     else:
         df = add_grouping_col(df, group_by, iso_col)
-        return {group: round(df.loc[df['grouping'] == group, target_col].isna().sum()/len(df[df['grouping'] == group]), 2)
-                for group in df['grouping'].unique()}
+        return {
+            group: round(
+                df.loc[df["grouping"] == group, target_col].isna().sum()
+                / len(df[df["grouping"] == group]),
+                2,
+            )
+            for group in df["grouping"].unique()
+        }
+
 
 def missing_by_row(df: pd.DataFrame, index_cols: Union[str, list] = None) -> dict:
     """
@@ -84,9 +123,12 @@ def missing_by_row(df: pd.DataFrame, index_cols: Union[str, list] = None) -> dic
     if index_cols is not None:
         df = df.set_index(index_cols)
 
-    return (df.isna().sum(axis = 1)/len(df.columns)).to_dict()
+    return (df.isna().sum(axis=1) / len(df.columns)).to_dict()
 
-def missing_country_list(df: pd.DataFrame, target_col: str, group_by: str = None, iso_col:str = 'iso_code') -> dict:
+
+def missing_country_list(
+    df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
+) -> dict:
     """
     Finds countries with null values
 
@@ -105,17 +147,24 @@ def missing_country_list(df: pd.DataFrame, target_col: str, group_by: str = None
     """
 
     if group_by is None:
-        return {'overall': df.loc[df[target_col].isna(), iso_col].unique()}
+        return {"overall": df.loc[df[target_col].isna(), iso_col].unique()}
     else:
         df = add_grouping_col(df, group_by, iso_col)
-        return {group: list(df.loc[(df[target_col].isna())&(df['grouping'] == group), iso_col].unique()) for group in df['grouping'].unique()}
+        return {
+            group: list(
+                df.loc[
+                    (df[target_col].isna()) & (df["grouping"] == group), iso_col
+                ].unique()
+            )
+            for group in df["grouping"].unique()
+        }
 
 
 def __3sigma_test(series: pd.Series) -> list:
     """
     Uses the imperical rule to determine if a value is an outlier
     returns a boolean list
-     """
+    """
 
     return abs(series - series.mean()) > 3 * series.std()
 
@@ -132,15 +181,18 @@ def __iqr_test(series: pd.Series) -> list:
 
     return (series < (q25 - (iqr * multiplier))) | (series > (q75 + (iqr * multiplier)))
 
+
 # outlier methods
 AVAILABLE_METHODS = {"empirical": __3sigma_test, "inter_quartile_range": __iqr_test}
 
-def get_outliers(df: pd.DataFrame,
-                 target_col: str,
-                 method: str = 'empirical',
-                 outlier_grouping: str = None,
-                 iso_col: str = 'iso_code'
-                 ) -> pd.DataFrame:
+
+def get_outliers(
+    df: pd.DataFrame,
+    target_col: str,
+    method: str = "empirical",
+    outlier_grouping: str = None,
+    iso_col: str = "iso_code",
+) -> pd.DataFrame:
     """
     Finds outliers in a dataframe
 
@@ -170,22 +222,23 @@ def get_outliers(df: pd.DataFrame,
     else:
         df_outlier = pd.DataFrame()
         df = add_grouping_col(df, outlier_grouping, iso_col)
-        for group in df['grouping'].unique():
-            group_df = df[df['grouping'] == group]
+        for group in df["grouping"].unique():
+            group_df = df[df["grouping"] == group]
 
-
-            df_outlier = pd.concat([df_outlier,
-                                    group_df[method_func(group_df[target_col])],
-                                    ],
-                                   ignore_index=True)
+            df_outlier = pd.concat(
+                [
+                    df_outlier,
+                    group_df[method_func(group_df[target_col])],
+                ],
+                ignore_index=True,
+            )
 
     return df_outlier
 
 
-def get_zeros(df: pd.DataFrame,
-              target_col: str,
-              group_by: str = None,
-              iso_col: str = 'iso_code') -> dict:
+def get_zeros(
+    df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
+) -> dict:
     """
     Calculates the proportion of a dataframe (by specific country grouping) that has 0 values
 
@@ -203,13 +256,18 @@ def get_zeros(df: pd.DataFrame,
     """
 
     if group_by is None:
-        return {'overall': round(len(df[df[target_col] == 0]) / len(df), 2)}
+        return {"overall": round(len(df[df[target_col] == 0]) / len(df), 2)}
 
     else:
         df = add_grouping_col(df, group_by, iso_col)
-        return {group: round(len(df[(df['grouping'] == group) & (df[target_col] == 0)])
-                       /len(df[df['grouping'] == group]), 2)
-                for group in df['grouping'].unique()}
+        return {
+            group: round(
+                len(df[(df["grouping"] == group) & (df[target_col] == 0)])
+                / len(df[df["grouping"] == group]),
+                2,
+            )
+            for group in df["grouping"].unique()
+        }
 
 
 def collinearity(

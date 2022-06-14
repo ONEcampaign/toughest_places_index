@@ -55,7 +55,7 @@ def get_inflation(refresh: bool = False, data_type: str = "headline") -> pd.Data
 
     return (
         read_inflation_data()
-        .astype({"date": 'datetime64[ns]'})
+        .astype({"date": "datetime64[ns]"})
         .loc[lambda d: d.indicator == data_type]
         .loc[lambda d: d.date.dt.month == 5]
         .groupby("iso_code", as_index=False)
