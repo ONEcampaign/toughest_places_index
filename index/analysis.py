@@ -128,4 +128,4 @@ if __name__ == "__main__":
     df = data_raw.merge(results_s, on="iso_code")
     df = df.set_index("iso_code")
     df = df.reset_index().pipe(add_short_names)
-    #c = df.corr()
+    # c = df.corr()

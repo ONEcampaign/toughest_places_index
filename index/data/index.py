@@ -185,7 +185,7 @@ class Index:
         r_data = self.data.mean(axis=1).sort_values(ascending=False).reset_index()
         r_data.columns = ["iso_code", "score"]
         r_data.score += abs(min_score)
-        r_data.score = round(100*r_data.score / range_,1)
+        r_data.score = round(100 * r_data.score / range_, 1)
 
         return r_data.set_index("iso_code")
 
