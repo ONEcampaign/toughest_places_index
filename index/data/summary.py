@@ -43,7 +43,21 @@ def add_grouping_col(df: pd.DataFrame, group_by:str, iso_col: str = 'iso_code'):
 
 
 def missing_by_column(df: pd.DataFrame, target_col: str, group_by: str = None, iso_col:str = 'iso_code') -> dict:
-    """ """
+    """
+    Calculates proportions of missing in a column
+
+    :param df: pd.Dataframe
+        pandas dataframe with an iso3 column
+    :param target_col: str
+        name of column that stores data values
+    :param group_by: str, optional
+        country grouping
+    :param iso_col: str, optional
+        name of column that stores iso3 codes
+
+    :return: dict
+        dictionary with grouping categories as keys and null proportions as values
+    """
 
     if group_by is None:
         return {'overall': round(df[target_col].isna().sum()/len(df), 2)}
@@ -54,8 +68,20 @@ def missing_by_column(df: pd.DataFrame, target_col: str, group_by: str = None, i
 
 
 
-def missing_by_row(df: pd.DataFrame, index_cols: Union[str, list] = 'iso_code') -> dict:
-    """ """
+def missing_by_row(df: pd.DataFrame, index_cols: Union[str, list] = None) -> dict:
+    """
+    Calculate proportion of null values by row
+
+    :param df: pd.DataFrame
+        pandas dataframe
+    :param index_cols: str or list, optional
+        name of index column
+        default = None
+
+    :return: dict
+        dictionary with index column values as keys
+        and proportion of values missing as values
+    """
 
     if index_cols is not None:
         df = df.set_index(index_cols)
@@ -64,7 +90,22 @@ def missing_by_row(df: pd.DataFrame, index_cols: Union[str, list] = 'iso_code') 
 
 
 def missing_country_list(df: pd.DataFrame, target_col: str, group_by: str = None, iso_col:str = 'iso_code') -> dict:
-    """ """
+    """
+    Finds countries with null values
+
+    :param df: pd.Dataframe
+        pandas dataframe
+    :param target_col: str
+        name of column that stores data values
+    :param group_by: str, optional
+        country grouping
+    :param iso_col: str, optional
+        name of column that stores iso3 codes
+
+    :return: dict
+        dictionary with grouping categories as keys
+        and lists of countries with missing data as values
+    """
 
     if group_by is None:
         return {'overall': df.loc[df[target_col].isna(), iso_col].unique()}
@@ -75,7 +116,10 @@ def missing_country_list(df: pd.DataFrame, target_col: str, group_by: str = None
 
 # Outliers
 def __3sigma_test(series: pd.Series) -> list:
-    """Uses the imperical rule to determine if a value is an outlier, returns a boolean list"""
+    """
+    Uses the imperical rule to determine if a value is an outlier
+    returns a boolean list
+     """
 
     return abs(series - series.mean()) > 3 * series.std()
 
@@ -83,7 +127,7 @@ def __3sigma_test(series: pd.Series) -> list:
 def __iqr_test(series: pd.Series) -> list:
     """
     Uses Inter-quartile range test to determine if a value is an outlier
-    factor - set the magnitude to test
+    returns a boolean list
     """
 
     multiplier = 1.5  # iqr multiplier
@@ -101,7 +145,24 @@ def get_outliers(df: pd.DataFrame,
                  outlier_grouping: str = None,
                  iso_col: str = 'iso_code'
                  ) -> pd.DataFrame:
-    """ """
+    """
+    Finds outliers in a dataframe
+
+    :param df: pd.Dataframe
+        pandas dataframe with an iso3 column
+    :param target_col: str
+        name of column that stores data values
+    :param method: str, optional
+        outlier calculation method, default = empirical, [empirical, inter_quartile_range]
+        default = empirical
+    :param outlier_grouping: str, optional
+        country grouping on which to apply the method, default = None.
+    :param iso_col: str, optional
+        name of column that stores iso3 codes
+
+    :return: pd.DataFrame
+        dataframe of outliers
+    """
 
     if method not in AVAILABLE_METHODS.keys():
         raise ValueError(f"{method}: invalid method")
@@ -129,7 +190,21 @@ def get_zeros(df: pd.DataFrame,
               target_col: str,
               group_by: str = None,
               iso_col: str = 'iso_code') -> dict:
-    """ """
+    """
+    Calculates the proportion of a dataframe (by specific country grouping) that has 0 values
+
+    :param df: pd.Dataframe
+        pandas dataframe with an iso3 column
+    :param target_col: str
+        name of column that stores data values
+    :param group_by: str, optional
+        country grouping
+    :param iso_col: str, optional
+        name of column that stores iso3 codes
+
+    :return: dict
+        dictionary with proportions of 0 values as dictionary values
+    """
 
     if group_by is None:
         return {'overall': round(len(df[df[target_col] == 0]) / len(df), 2)}
