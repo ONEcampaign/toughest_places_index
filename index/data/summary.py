@@ -8,7 +8,18 @@ from typing import Union
 
 
 def add_grouping_col(df: pd.DataFrame, group_by:str, iso_col: str = 'iso_code'):
-    """ """
+    """
+    Adds a column for country groups to a dataframe
+
+    :param df: pd.DataFrame
+        pandas dataframe
+    :param group_by: str
+        category to group values by
+    :param iso_col:
+        column containting iso3 codes
+    :return: pd.DataFrame
+        pandas dataframe with new column 'grouping' with grouping category values
+    """
 
     match group_by:
         case 'iso_code':
@@ -60,6 +71,61 @@ def missing_country_list(df: pd.DataFrame, target_col: str, group_by: str = None
     else:
         df = add_grouping_col(df, group_by, iso_col)
         return {group: list(df.loc[(df[target_col].isna())&(df['grouping'] == group), iso_col].unique()) for group in df['grouping'].unique()}
+
+
+# Outliers
+def __3sigma_test(series: pd.Series) -> list:
+    """Uses the imperical rule to determine if a value is an outlier, returns a boolean list"""
+
+    return abs(series - series.mean()) > 3 * series.std()
+
+
+def __iqr_test(series: pd.Series) -> list:
+    """
+    Uses Inter-quartile range test to determine if a value is an outlier
+    factor - set the magnitude to test
+    """
+
+    multiplier = 1.5  # iqr multiplier
+    q25, q75 = series.quantile(0.25), series.quantile(0.75)
+    iqr = q75 - q25
+
+    return (series < (q25 - (iqr * multiplier))) | (series > (q75 + (iqr * multiplier)))
+
+# outlier methods
+AVAILABLE_METHODS = {"empirical": __3sigma_test, "inter_quartile_range": __iqr_test}
+
+def get_outliers(df: pd.DataFrame,
+                 target_col: str,
+                 method: str = 'empirical',
+                 outlier_grouping: str = None,
+                 iso_col: str = 'iso_code'
+                 ) -> pd.DataFrame:
+    """ """
+
+    if method not in AVAILABLE_METHODS.keys():
+        raise ValueError(f"{method}: invalid method")
+    else:
+        method_func = AVAILABLE_METHODS[method]
+
+    if outlier_grouping is None:
+        df_outlier = df[method_func(df[target_col])]
+    else:
+        df_outlier = pd.DataFrame()
+        df = add_grouping_col(df, outlier_grouping, iso_col)
+        for group in df['grouping'].unique():
+            group_df = df[df['grouping'] == group]
+
+
+            df_outlier = pd.concat([df_outlier,
+                                    group_df[method_func(group_df[target_col])],
+                                    ],
+                                   ignore_index=True)
+
+    return df_outlier
+
+
+
 
 
 
