@@ -125,7 +125,20 @@ def get_outliers(df: pd.DataFrame,
     return df_outlier
 
 
+def get_zeros(df: pd.DataFrame,
+              target_col: str,
+              group_by: str = None,
+              iso_col: str = 'iso_code') -> dict:
+    """ """
 
+    if group_by is None:
+        return {'overall': round(len(df[df[target_col] == 0]) / len(df), 2)}
+
+    else:
+        df = add_grouping_col(df, group_by, iso_col)
+        return {group: round(len(df[(df['grouping'] == group) & (df[target_col] == 0)])
+                       /len(df[df['grouping'] == group]), 2)
+                for group in df['grouping'].unique()}
 
 
 
