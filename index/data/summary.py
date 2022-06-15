@@ -62,6 +62,12 @@ def add_grouping_col(df: pd.DataFrame, group_by: str, iso_col: str = "iso_code")
                 .reset_index(drop=True)
             )
 
+def __missing_countries_subset(
+    df: pd.DataFrame, target_col: str, subset_col: str, iso_col: str = "iso_code"
+) -> dict:
+    """returns dictionary with grouping categories as keys and lists of COUNTRIES where values are null as values"""
+
+
         case "income_level":
             return (
                 common.add_income_levels(df, target_col="grouping")
@@ -89,6 +95,7 @@ def missing_by_column(
 
     :return: dict
         dictionary with grouping categories as keys and null proportions as values
+
     """
 
     if group_by is None:
