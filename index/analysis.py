@@ -126,6 +126,5 @@ def run_index(dimensions: tuple) -> pd.DataFrame:
 if __name__ == "__main__":
 
     index_dimensions = get_dimensions()
-    dimensions = get_dimensions()
     index_data = run_index(index_dimensions)
     index_data.to_clipboard(index=False)
