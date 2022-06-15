@@ -6,9 +6,9 @@ import pandas as pd
 from index.data.imputers import IMPUTERS, one_income_imputer
 from index.data.summary import (
     collinearity,
-    check_zeros,
-    outliers,
-    summarize_missing_full,
+    get_zeros,
+    get_outliers,
+    missing_by_row,
 )
 import numpy as np
 
@@ -43,7 +43,7 @@ class Index:
 
     def check_zeros(self, target_col: str) -> dict:
         """Check for zeros in the data"""
-        return self.get_data().pipe(check_zeros, target_col=target_col)
+        return self.get_data().pipe(get_zeros, target_col=target_col)
 
     def check_outliers(self, method: str = "empirical", cluster: str = None) -> dict:
         """Check for outliers in the data"""
@@ -53,14 +53,14 @@ class Index:
         for dimension in self.dimensions:
             for indicator in dimension.indicators:
                 out[indicator.indicator_name] = indicator.get_data().pipe(
-                    outliers, target_col="value", method=method, cluster=cluster
+                    get_outliers, target_col="value", method=method, outlier_grouping=cluster
                 )
 
         return out
 
     def check_missing_data(self) -> pd.DataFrame:
         """Check for missing data in the data"""
-        return pd.DataFrame([self.get_data().pipe(summarize_missing_full)]).T
+        return pd.DataFrame([self.get_data().pipe(missing_by_row)]).T
 
     def index_data(
         self,

@@ -304,6 +304,10 @@ def _study_countries() -> list:
     ]
     return countries
 
+def _all_countries() -> list:
+    """return all countries"""
+
+    return list(income_levels().keys())
 
 def _no_hics_umics() -> list:
     """Return a list of COUNTRIES excluding hics and umics"""
@@ -340,6 +344,7 @@ def _lics_lmics_countries() -> list:
 
 
 STUDY_COUNTRIES: dict[str, list] = {
+    "all_countries": _all_countries(),
     "study": _study_countries(),
     "no_hics": _no_hics(),
     "no_hics_umics": _no_hics_umics(),
