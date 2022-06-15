@@ -32,7 +32,7 @@ def get_insufficient_food(refresh: bool = False) -> pd.DataFrame:
     return (
         read_hunger_data()
         .loc[lambda d: d.date.dt.month <= 5]
-        .pipe(get_latest, by=['iso_code'])
+        .pipe(get_latest, by=["iso_code"])
         .reset_index()
         .filter(["iso_code", "date", "value"], axis=1)
         .pipe(add_share_of_population, target_col="value")

@@ -129,4 +129,3 @@ if __name__ == "__main__":
     dimensions = get_dimensions()
     index_data = run_index(index_dimensions)
     index_data.to_clipboard(index=False)
-
