@@ -53,7 +53,10 @@ class Index:
         for dimension in self.dimensions:
             for indicator in dimension.indicators:
                 out[indicator.indicator_name] = indicator.get_data().pipe(
-                    get_outliers, target_col="value", method=method, outlier_grouping=cluster
+                    get_outliers,
+                    target_col="value",
+                    method=method,
+                    outlier_grouping=cluster,
                 )
 
         return out
