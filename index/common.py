@@ -1,5 +1,4 @@
 """Utility Functions"""
-import country_converter
 import os
 
 import country_converter as cc
@@ -257,7 +256,6 @@ def add_income_levels(
 
 
 def keep_only_valid_iso(df: pd.DataFrame) -> pd.DataFrame:
-
     valid_iso = cc.CountryConverter().get_correspondence_dict("ISO3", "name_short")
 
     missing = {i for i in df.iso_code.unique() if i not in valid_iso}

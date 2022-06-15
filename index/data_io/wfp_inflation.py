@@ -1,11 +1,11 @@
+import country_converter as cc
 import pandas as pd
+
 from index.common import add_short_names, read_and_append
 from index.config import PATHS
-import country_converter as cc
 
 
 def _read_inflation(country_iso: str) -> pd.DataFrame:
-
     url = f"https://api.vam.wfp.org/dataviz/api/GetCsv?idx=71,116&iso3={country_iso}"
     try:
         return (
@@ -32,7 +32,6 @@ def _read_inflation(country_iso: str) -> pd.DataFrame:
 
 
 def refresh_inflation_data(iso_codes: list = None) -> None:
-
     # If no list of iso_codes provided, use all (from coco)
     if iso_codes is None:
         iso_codes = cc.CountryConverter().data["ISO3"].unique()

@@ -1,9 +1,8 @@
 from typing import Any
 
-from sklearn.experimental import enable_iterative_imputer  # noqa
-
 import pandas as pd
 from country_converter import country_converter
+from sklearn.experimental import enable_iterative_imputer  # noqa
 from sklearn.impute import SimpleImputer, IterativeImputer, KNNImputer
 
 from index import common
@@ -74,9 +73,6 @@ def skl_simple_imputer(
 
 
 def skl_iterative_imputer(df: pd.DataFrame, **kwargs) -> pd.DataFrame:
-    """Use a simple imputer applied to the whole column.
-    Strategy can be "median", "mean", or "most_frequent"
-    """
     return __skl_imputer(df, imputer_obj=IterativeImputer, **kwargs)
 
 

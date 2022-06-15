@@ -51,9 +51,14 @@ def skl_maxabs_scaler(df: pd.DataFrame, **Kwargs) -> pd.DataFrame:
 
 
 def skl_quantile_transformer(
-    df: pd.DataFrame, *, n_quantiles: int = 200, output_distribution: str = "normal"
+    df: pd.DataFrame, *, n_quantiles: int = 200, output_distribution: str = "uniform"
 ) -> pd.DataFrame:
-    return __skl_scaler(df, scaler_obj=QuantileTransformer)
+    return __skl_scaler(
+        df,
+        scaler_obj=QuantileTransformer,
+        n_quantiles=n_quantiles,
+        output_distribution=output_distribution,
+    )
 
 
 def skl_power_transformer(

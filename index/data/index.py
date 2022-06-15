@@ -1,8 +1,10 @@
 import copy
 from dataclasses import dataclass, field
-from index.data.dimension import Dimension
+
+import numpy as np
 import pandas as pd
 
+from index.data.dimension import Dimension
 from index.data.imputers import IMPUTERS, one_income_imputer
 from index.data.summary import (
     collinearity,
@@ -10,7 +12,6 @@ from index.data.summary import (
     get_outliers,
     missing_by_row,
 )
-import numpy as np
 
 
 @dataclass
@@ -94,6 +95,7 @@ class Index:
             self.data = self.data.mean(axis=1).sort_values(ascending=False)
 
     def run_pca(self, components: int = 2) -> tuple:
+        """Run Principal Component Analysis on the rescaled, imputed data"""
         from sklearn.decomposition import PCA
 
         pca = PCA(n_components=components)
