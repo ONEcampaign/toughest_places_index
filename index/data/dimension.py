@@ -1,12 +1,9 @@
-"""dataclass which should store data for two+ indicators. It should also take care of
-things like assessing the similarity/correlation between the loaded indicators,
-checking for data completeness, dealing with imputations (at dimension level) etc."""
-
-
 from dataclasses import dataclass, field
-from index.data.indicator import Indicator
+
 import pandas as pd
+
 from index.data.imputers import IMPUTERS
+from index.data.indicator import Indicator
 
 
 @dataclass

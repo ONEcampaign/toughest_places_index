@@ -30,8 +30,8 @@ _Wasting:_ This refers to "Prevalence of wasting, weight for height (% of childr
 - The latest available data (up to end of May 2022) is used for all indicators. 
 - Since the data is on different scales, it is rescaled using a Quantile Transformer with a normal distribution.
 A quantile transformer was chosen as it deals well with extreme outliers (a particular problem of inflation data). 
-A uniform scale across indicators was important given that the index is created through a simple arithmetic mean of the indicators. 
-- Missing data is imputed using a K Nearest Neighbours, using 10 neighbours and all the index indicators as features.
+A uniform scale across indicators was used given that the index is created through a simple arithmetic mean of the indicators. 
+- Missing data is imputed using K-Nearest Neighbours, using 10 neighbours and all the index indicators as features.
 This method was chosen in order to avoid assigning arbitrary values to countries with missing data (like the regional
 or income level mean of the missing indicator, for example). 
 - Finally, for simplicity, the resulting index is a simple arithmetic mean (equal weights) of the indicators.

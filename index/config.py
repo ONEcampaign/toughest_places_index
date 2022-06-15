@@ -1,5 +1,3 @@
-"""Configuration scripts for the project"""
-
 import os
 
 
@@ -33,7 +31,6 @@ class Paths:
 
 # Paths object with property access to the right places
 PATHS: Paths = Paths(os.path.dirname(os.path.dirname(__file__)))
-
 
 DEBT_SERVICE_IDS: dict = {
     "DT.AMT.BLAT.CD": "Bilateral",
