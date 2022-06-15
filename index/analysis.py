@@ -3,7 +3,12 @@ This file contains the final analysis
 """
 import copy
 
+import pandas as pd
+
+from index.common import STUDY_COUNTRIES, add_short_names, add_population_column
+from index.data.dimension import Dimension
 from index.data.index import Index
+from index.data.indicator import Indicator
 from index.indicators import (
     get_insufficient_food,
     get_inflation,
@@ -12,14 +17,6 @@ from index.indicators import (
     get_fiscal_reserves,
     get_service_spending_ratio,
 )
-
-from index.data.indicator import Indicator
-from index.data.dimension import Dimension
-
-from index.common import STUDY_COUNTRIES
-
-from index.common import add_short_names
-import pandas as pd
 
 COUNTRIES = STUDY_COUNTRIES["study"]
 COUNTRIES = [c for c in COUNTRIES if c not in ["KIR", "FSM", "PRK", "WSM"]]
@@ -124,7 +121,7 @@ def run_index(dimensions: tuple) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-
     index_dimensions = get_dimensions()
     index_data = run_index(index_dimensions)
+    index_data = index_data.pipe(add_population_column)
     index_data.to_clipboard(index=False)
