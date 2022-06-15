@@ -40,7 +40,7 @@ class Indicator:
         # Keep only raw_data with valid iso codes
         self.raw_data = self.raw_data.pipe(keep_only_valid_iso)
 
-        # Optionally reindex the dataframe so only countries under study are kept
+        # Optionally reindex the dataframe so only COUNTRIES under study are kept
         if self.countries_list is not None:
             self.raw_data = (
                 self.raw_data.set_index("iso_code")

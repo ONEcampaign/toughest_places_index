@@ -17,7 +17,7 @@ def _get_country_codes() -> None:
     file = requests.get(url).content
 
     # WFP codes
-    wfp = json.loads(file)["countries"]
+    wfp = json.loads(file)["COUNTRIES"]
 
     # Create a dictionary with the iso_code: country code
     codes = {d["iso3"]: d["adm0_code"] for d in wfp}

@@ -1,8 +1,5 @@
-""" THIS FILE EXISTS FOR TESTING PURPOSES ONLY
-
-
-------- IT DOES NOT CONTAIN ACTUAL ANALYSIS YET -------
-
+"""
+This file contains the final analysis
 """
 import copy
 
@@ -11,10 +8,7 @@ from index.data.index import Index
 from index.indicators import (
     get_insufficient_food,
     get_inflation,
-    get_economist_index,
     get_wasting,
-    get_fiscal_reserves,
-    get_service_spending_ratio,
 )
 
 from index.data.indicator import Indicator
@@ -25,107 +19,57 @@ from index.common import STUDY_COUNTRIES
 from index.common import add_short_names
 import pandas as pd
 
-countries = STUDY_COUNTRIES["lics_lmics"]
-countries = [c for c in countries if c not in ["KIR", "FSM", "PRK", "WSM"]]
+COUNTRIES = STUDY_COUNTRIES["study"]
+COUNTRIES = [c for c in COUNTRIES if c not in ["KIR", "FSM", "PRK", "WSM"]]
 
-# Crete individual indicators. Filter to a set of countries by using countries_list
+RESCALE_PARAMETERS = {"scaler_name": "quantile"}
+IMPUTE_PARAMETERS = {"method": "knn", "n_neighbors": 10}
 
 
-def get_dimensions() -> tuple:
+def get_dimensions() -> tuple[Dimension, Dimension]:
     """Return a list of indicators"""
 
     insufficient_food = Indicator(
         get_insufficient_food(refresh=False),
-        "Insufficient Food Consumption",
-        countries_list=countries,
+        "Insufficient Food Consumption (% of population)",
+        countries_list=COUNTRIES,
+        more_is_worse=True,
     )
-    # insufficient_food.raw_data = insufficient_food.raw_data.fillna(0)
 
+    # Impute missing hunger data with zeros.
+    insufficient_food.raw_data = insufficient_food.raw_data.fillna(0)
+
+    # Headline inflation
     inflation = Indicator(
-        get_inflation(refresh=False), "Headline Inflation", countries_list=countries
+        get_inflation(refresh=False),
+        "Headline Inflation (%)",
+        countries_list=COUNTRIES,
+        more_is_worse=True,
     )
 
-    economist_index = Indicator(
-        get_economist_index(),
-        "Economist Index",
-        countries_list=countries,
-        more_is_worse=False,
-    )
-
-    wasting = Indicator(get_wasting(refresh=False), "Wasting", countries_list=countries)
-
-    fiscal_reserves = Indicator(
-        get_fiscal_reserves(refresh=False),
-        "Fiscal Reserves minus gold",
-        countries_list=countries,
-        more_is_worse=False,
-    )
-
-    service_spending_ratio = Indicator(
-        get_service_spending_ratio(2022),
-        "Service Spending Ratio",
-        countries_list=countries,
+    wasting = Indicator(
+        get_wasting(refresh=False),
+        "Prevalence of Wasting (% of children under 5)",
+        countries_list=COUNTRIES,
+        more_is_worse=True,
     )
 
     dimension_1 = Dimension(indicators=[insufficient_food, inflation])
-    dimension_2 = Dimension(indicators=[economist_index, wasting])
-    dimension_3 = Dimension(indicators=[fiscal_reserves, service_spending_ratio])
+    dimension_2 = Dimension(indicators=[wasting])
 
-    return dimension_1, dimension_2, dimension_3
-
-
-def get_index(dimensions_tup: tuple) -> Index:
-    dimension_1, dimension_2, dimension_3 = dimensions_tup
-    return Index(dimensions=[dimension_1, dimension_2, dimension_3])
+    return dimension_1, dimension_2
 
 
-def index_version(
-    dimensions_tup: tuple, rescale_parameters: dict, impute_parameters: dict
-) -> pd.DataFrame:
-    index = get_index(dimensions_tup)
+def run_index(dimensions: tuple):
+    """Run the index analysis"""
 
-    index.index_data(
-        rescale_parameters=rescale_parameters, impute_parameters=impute_parameters
-    )
+    index = Index(dimensions=list(dimensions))
 
-    res = index.get_data().reset_index().pipe(add_short_names)
-    res.index = res.index + 1
-
-    return res
-
-
-def main(dimensions: tuple):
-
-    versions = {
-        "robust and knn10": (
-            {"scaler_name": "quantile"},
-            {"method": "knn", "n_neighbors": 10},
-        ),
-    }
-
-    results = {
-        version_n: index_version(copy.deepcopy(dimensions), *version)
-        for version_n, version in versions.items()
-    }
-
-    with pd.ExcelWriter(PATHS.data + r"/results2.xlsx") as writer:
-        for result_n, result in results.items():
-            result.to_excel(writer, sheet_name=result_n)
-
+    with pd.ExcelWriter(PATHS.data + r"/index_results_detailed.xlsx") as writer:
+            #result.to_excel(writer, sheet_name=result_n)
+            pass
 
 if __name__ == "__main__":
     dimensions_raw = get_dimensions()
-    index = Index(dimensions=list(copy.deepcopy(dimensions_raw)))
 
-    index.index_data(summarised=False)
-    results = index.get_data().reset_index()
-    results_s = index.rescale_index()
-
-    index_raw = Index(dimensions=list(copy.deepcopy(dimensions_raw)))
-    data_raw = index_raw.get_data()
-    data_raw = data_raw.reset_index()
-
-    df = data_raw.merge(results_s, on="iso_code")
-    df = df.set_index("iso_code")
-    df = df.reset_index().pipe(add_short_names)
-    #c = df.corr()
+    run_index(dimensions=dimensions_raw)
