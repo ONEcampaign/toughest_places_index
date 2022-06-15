@@ -28,7 +28,7 @@ _Wasting:_ This refers to "Prevalence of wasting, weight for height (% of childr
 - The index considers only Low income and Lower middle income countries. Additionally, it considers Upper middle income countries with good data coverage.
  A total of 102 countries are included in the analysis.
 - The latest available data (up to end of May 2022) is used for all indicators. 
-- Since the data is on different scales, it is rescaled using a Quantile Transformer with a normal distribution.
+- Since the data is on different scales, it is rescaled using a Quantile Transformer with a uniform distribution.
 A quantile transformer was chosen as it deals well with extreme outliers (a particular problem of inflation data). 
 A uniform scale across indicators was used given that the index is created through a simple arithmetic mean of the indicators. 
 - Missing data is imputed using K-Nearest Neighbours, using 10 neighbours and all the index indicators as features.
