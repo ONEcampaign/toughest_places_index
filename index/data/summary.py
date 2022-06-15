@@ -28,7 +28,7 @@ def __missing_prop(df: pd.DataFrame, target_col: str, grouping_col: str = None) 
 def __missing_countries_subset(
     df: pd.DataFrame, target_col: str, subset_col: str, iso_col: str = "iso_code"
 ) -> dict:
-    """returns dictionary with grouping categories as keys and lists of countries where values are null as values"""
+    """returns dictionary with grouping categories as keys and lists of COUNTRIES where values are null as values"""
 
     return {
         subset: df.loc[
@@ -42,7 +42,7 @@ def missing_countries(
     df: pd.DataFrame, target_col: str, iso_col: str = "iso_code", by=None
 ) -> dict:
     """
-    Finds countries with null values, broken down by a specific grouping
+    Finds COUNTRIES with null values, broken down by a specific grouping
 
     :param df: pd.Dataframe
         pandas dataframe with an iso3 column
@@ -54,7 +54,7 @@ def missing_countries(
         country grouping [continent, region, income_level]
 
     :return: dict
-        dictionary with grouping categories as keys and lists of countries as values
+        dictionary with grouping categories as keys and lists of COUNTRIES as values
     """
     if by is None:
         return {"overall": df.loc[df[target_col].isna(), iso_col].unique()}

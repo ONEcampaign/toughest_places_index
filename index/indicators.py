@@ -31,7 +31,9 @@ def get_insufficient_food(refresh: bool = False) -> pd.DataFrame:
     # Read the database, get the latest values, and transform to share of population
     return (
         read_hunger_data()
-        .pipe(get_latest, by="iso_code")
+        .loc[lambda d: d.date.dt.month <= 5]
+        .pipe(get_latest, by=["iso_code"])
+        .reset_index()
         .filter(["iso_code", "date", "value"], axis=1)
         .pipe(add_share_of_population, target_col="value")
     )
@@ -52,8 +54,11 @@ def get_inflation(refresh: bool = False, data_type: str = "headline") -> pd.Data
 
     return (
         read_inflation_data()
+        .astype({"date": "datetime64"})
         .loc[lambda d: d.indicator == data_type]
+        .loc[lambda d: d.date.dt.year >= 2020]
         .pipe(get_latest, by="iso_code")
+        .reset_index()
         .filter(["iso_code", "date", "value"], axis=1)
     )
 

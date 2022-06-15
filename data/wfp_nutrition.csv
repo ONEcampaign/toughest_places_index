@@ -71,10 +71,18 @@ TCD,wasting,10.0,Chad
 TCD,stunting,30.5,Chad
 CHL,wasting,0.3,Chile
 CHL,stunting,1.8,Chile
+CHN,wasting,1.9,China
+CHN,stunting,8.1,China
+COL,wasting,1.6,Colombia
+COL,stunting,12.7,Colombia
 COM,wasting,11.2,Comoros
 COM,stunting,31.1,Comoros
 COG,wasting,8.2,Congo Republic
 COG,stunting,21.2,Congo Republic
+CRI,wasting,1.0,Costa Rica
+CRI,stunting,5.6,Costa Rica
+HRV,wasting,,Croatia
+HRV,stunting,,Croatia
 CYP,wasting,,Cyprus
 CYP,stunting,,Cyprus
 CZE,wasting,4.6,Czech Republic
@@ -317,8 +325,6 @@ TTO,wasting,6.4,Trinidad and Tobago
 TTO,stunting,9.2,Trinidad and Tobago
 TUN,wasting,2.1,Tunisia
 TUN,stunting,8.4,Tunisia
-TUR,wasting,1.7,Turkey
-TUR,stunting,6.0,Turkey
 UGA,wasting,3.5,Uganda
 UGA,stunting,28.9,Uganda
 UKR,wasting,8.2,Ukraine
@@ -357,6 +363,8 @@ VUT,wasting,4.7,Vanuatu
 VUT,stunting,28.9,Vanuatu
 SEN,wasting,8.1,Senegal
 SEN,stunting,18.8,Senegal
+PSE,wasting,1.2,Palestine
+PSE,stunting,7.4,Palestine
 MNE,wasting,2.8,Montenegro
 MNE,stunting,9.4,Montenegro
 SRB,wasting,3.9,Serbia
