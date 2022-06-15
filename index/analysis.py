@@ -3,12 +3,14 @@ This file contains the final analysis
 """
 import copy
 
-from index.config import PATHS
 from index.data.index import Index
 from index.indicators import (
     get_insufficient_food,
     get_inflation,
     get_wasting,
+    get_economist_index,
+    get_fiscal_reserves,
+    get_service_spending_ratio,
 )
 
 from index.data.indicator import Indicator
@@ -60,16 +62,71 @@ def get_dimensions() -> tuple[Dimension, Dimension]:
     return dimension_1, dimension_2
 
 
-def run_index(dimensions: tuple):
+def get_macro_dimension_data() -> pd.DataFrame:
+    """Return macro dimension data"""
+
+    # Get the macro dimensions
+    economist = Indicator(
+        get_economist_index(refresh=False),
+        "Economist Food Security Index",
+        countries_list=COUNTRIES,
+        more_is_worse=False,
+    )
+
+    reserves = Indicator(
+        get_fiscal_reserves(refresh=False),
+        "Fiscal Reserves excluding gold (per capita)",
+        countries_list=COUNTRIES,
+        more_is_worse=False,
+    )
+
+    service = Indicator(
+        get_service_spending_ratio(2022),
+        "Debt Service to Government Spending Ratio",
+        countries_list=COUNTRIES,
+        more_is_worse=True,
+    )
+
+    econ_dimension = Dimension(indicators=[economist, reserves, service])
+
+    return econ_dimension.get_data()
+
+
+def run_index(dimensions: tuple) -> pd.DataFrame:
     """Run the index analysis"""
 
-    index = Index(dimensions=list(dimensions))
+    index_detailed = Index(dimensions=copy.deepcopy(list(dimensions)))
+    index_summary = Index(dimensions=copy.deepcopy(list(dimensions)))
 
-    with pd.ExcelWriter(PATHS.data + r"/index_results_detailed.xlsx") as writer:
-            #result.to_excel(writer, sheet_name=result_n)
-            pass
+    # Run the index analysis
+    index_summary.index_data(summarised=False)
+    index_summary_data = (
+        index_summary.rescale_index()
+        .reset_index()
+        .pipe(add_short_names)
+        .rename({"score": "Score", "country_name": "Country"}, axis=1)
+    )
+
+    # Get the raw data
+    raw_data = index_detailed.get_data().reset_index()
+
+    # Context data
+    context_data = get_macro_dimension_data()
+
+    # combined dataframe
+    df = (
+        index_summary_data.merge(raw_data, on=["iso_code"])
+        .merge(context_data, on=["iso_code"])
+        .round(1)
+    )
+
+    return df
+
 
 if __name__ == "__main__":
-    dimensions_raw = get_dimensions()
 
-    run_index(dimensions=dimensions_raw)
+    index_dimensions = get_dimensions()
+    dimensions = get_dimensions()
+    index_data = run_index(index_dimensions)
+    index_data.to_clipboard(index=False)
+
