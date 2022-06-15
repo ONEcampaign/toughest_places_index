@@ -24,5 +24,5 @@ def wb_reserves(refresh: bool = False) -> pd.DataFrame:
     """Get the World Bank data for reserves minus gold"""
     id_: str = "FI.RES.XGLD.CD"
     return wb_data(
-        series=id_, series_name="Reserves (%)", years=15, download=refresh
+        series=id_, series_name="Reserves minus gold (USD)", years=15, download=refresh
     ).pipe(add_short_names)
