@@ -73,7 +73,7 @@ def add_grouping_col(df: pd.DataFrame, group_by: str, iso_col: str = "iso_code")
 
 
 def missing_by_column(
-        df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
+    df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
 ) -> dict:
     """
     Calculates proportions of missing in a column
@@ -128,7 +128,7 @@ def missing_by_row(df: pd.DataFrame, index_cols: Union[str, list] = None) -> dic
 
 
 def missing_country_list(
-        df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
+    df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
 ) -> dict:
     """
     Finds countries with null values
@@ -188,11 +188,11 @@ AVAILABLE_METHODS = {"empirical": __3sigma_test, "inter_quartile_range": __iqr_t
 
 
 def get_outliers(
-        df: pd.DataFrame,
-        target_col: str,
-        method: str = "empirical",
-        outlier_grouping: str = None,
-        iso_col: str = "iso_code",
+    df: pd.DataFrame,
+    target_col: str,
+    method: str = "empirical",
+    outlier_grouping: str = None,
+    iso_col: str = "iso_code",
 ) -> pd.DataFrame:
     """
     Finds outliers in a dataframe
@@ -238,7 +238,7 @@ def get_outliers(
 
 
 def get_zeros(
-        df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
+    df: pd.DataFrame, target_col: str, group_by: str = None, iso_col: str = "iso_code"
 ) -> dict:
     """
     Calculates the proportion of a dataframe (by specific country grouping) that has 0 values
@@ -272,10 +272,10 @@ def get_zeros(
 
 
 def collinearity(
-        df: pd.DataFrame,
-        bounds: tuple = (0.7, -0.7),
-        index_col: str = None,
-        column: str = None,
+    df: pd.DataFrame,
+    bounds: tuple = (0.7, -0.7),
+    index_col: str = None,
+    column: str = None,
 ) -> dict:
     """
     Returns a dictionary with variables as keys and correlated variables in a list as values, using pearson correlation
@@ -304,7 +304,7 @@ def collinearity(
                 corr_df[
                     ((corr_df[var] >= bounds[0]) | (corr_df[var] <= bounds[1]))
                     & (corr_df[var].index != var)
-                    ].index
+                ].index
             )
             for var in corr_df.columns
         }
@@ -314,6 +314,6 @@ def collinearity(
                 corr_df[
                     ((corr_df[column] >= bounds[0]) | (corr_df[column] <= bounds[1]))
                     & (corr_df[column].index != column)
-                    ].index
+                ].index
             )
         }
